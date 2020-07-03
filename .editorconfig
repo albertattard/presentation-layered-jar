@@ -1,0 +1,10 @@
+root = true
+
+[*]
+indent_size = 2
+indent_style = space
+trim_trailing_whitespace = true
+charset = utf-8
+end_of_line = lf
+spaces_around_brackets = inside
+wildcard_import_limit = 0

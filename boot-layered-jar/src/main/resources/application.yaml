@@ -1,0 +1,33 @@
+spring:
+  datasource:
+    url: ${DATABASE_URL}
+    driver-class-name: ${DATABASE_DRIVER}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    hibernate:
+      ddl-auto: validate
+
+management:
+  endpoints:
+    web:
+      base-path:
+      exposure:
+        include: env, health, info, metrics, prometheus
+  endpoint:
+    health:
+      show-details: always
+
+info:
+  app:
+    version: 1.0.0
+    name: Layered JAR Presentation
+    authors:
+      - Johanna Lang
+      - Albert Attard
+    link: https://github.com/albertattard/presentation-layered-jar
