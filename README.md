@@ -15,6 +15,8 @@ This demo can work with newer version of Java too.
 
 1. [Spring Boot Fat JAR](#spring-boot-fat-jar)
 1. [Spring Boot Layered JAR](#spring-boot-layered-jar)
+1. [Micronaut Fat JAR](#micronaut-fat-jar)
+1. [Micronaut Layered JAR](#micronaut-layered-jar)
 
 ### Spring Boot Fat JAR
 
@@ -154,7 +156,7 @@ This demo can work with newer version of Java too.
    {"message":"Layered JARS are great!!"}
    ```
 
-## Micronaut Fat JAR
+### Micronaut Fat JAR
 
 1. Build the project
 
@@ -214,7 +216,7 @@ This demo can work with newer version of Java too.
    {"message":"Layered JARS are great!!"}
    ```
 
-## Micronaut Layered JAR
+### Micronaut Layered JAR
 
 1. Build the project
 
