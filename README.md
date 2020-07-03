@@ -11,7 +11,11 @@ Java 8 is used in this demo as this is the most popular version of Java followed
 
 This demo can work with newer version of Java too.
 
-## Spring Boot Layered JAR
+## Examples
+
+1. [Spring Boot Layered JAR](#spring-boot-layered-jar)
+
+### Spring Boot Layered JAR
 
 1. Build the project
 
@@ -88,3 +92,8 @@ This demo can work with newer version of Java too.
    ```json
    {"message":"Layered JARS are great!!"}
    ```
+
+## Other technologies
+
+1. [Google JIB](https://github.com/GoogleContainerTools/jib)
+1. [Buildpacks](https://docs.cloudfoundry.org/buildpacks/)
