@@ -1,3 +1,4 @@
 rootProject.name = 'presentation-layered-jar'
 
 include('boot-layered-jar')
+include('micronaut-layered-jar')
