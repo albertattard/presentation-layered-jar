@@ -3,15 +3,17 @@
   "version": "1.0.0",
   "description": "Layered JAR Presentation",
   "scripts": {
-    "start": "./node_modules/backslide/bin/bs serve"
+    "start": "./node_modules/backslide/bin/bs serve",
+    "pdf": "./node_modules/backslide/bin/bs pdf *presentation-remote-meetup.md -o assets/pdf"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/albertattard/presentation-layered-jar.git"
   },
   "keywords": [
-    "domain",
-    "primitives"
+    "docker",
+    "spring boot",
+    "layerd JAR"
   ],
   "contributors": [
     {
@@ -31,6 +33,7 @@
   },
   "homepage": "https://github.com/albertattard/presentation-layered-jar#readme",
   "dependencies": {
-    "backslide": "^2.6.2"
+    "backslide": "^2.6.2",
+    "decktape": "^3.0.0"
   }
 }
