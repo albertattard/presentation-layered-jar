@@ -1,0 +1,36 @@
+{
+  "name": "presentation-layered-jar",
+  "version": "1.0.0",
+  "description": "Layered JAR Presentation",
+  "scripts": {
+    "start": "./node_modules/backslide/bin/bs serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/albertattard/presentation-layered-jar.git"
+  },
+  "keywords": [
+    "domain",
+    "primitives"
+  ],
+  "contributors": [
+    {
+      "name": "Johanna Lang",
+      "email": "johanna.lang@thoughtworks.com",
+      "url": ""
+    },
+    {
+      "name": "Albert Attard",
+      "email": "albert.attard@thoughtworks.com",
+      "url": "https://github.com/albertattard/"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/albertattard/presentation-layered-jar/issues"
+  },
+  "homepage": "https://github.com/albertattard/presentation-layered-jar#readme",
+  "dependencies": {
+    "backslide": "^2.6.2"
+  }
+}
