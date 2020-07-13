@@ -108,8 +108,5 @@ Please send any feedback to: albert.attard@thoughtworks.com or jlang@thoughtwork
 
 class: careers
 
----
-
-class: careers
 
 
