@@ -23,7 +23,7 @@ class: impact
 
 ## By Johanna Lang and Albert Attard
 
-*johanna.lang@thoughtworks.com*
+*jlang@thoughtworks.com*
 *albert.attard@thoughtworks.com*
 
 ---
@@ -78,7 +78,7 @@ class: impact
 # Thank You
 ## Feedback makes us better
 
-Please send any feedback to: albert.attard@thoughtworks.com
+Please send any feedback to: albert.attard@thoughtworks.com or jlang@thoughtworks.com
 
 ---
 
