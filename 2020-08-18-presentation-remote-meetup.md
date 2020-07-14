@@ -44,13 +44,28 @@ class: impact
 
 ---
 
-# Docker Images and Containers
+# What is a container?
 
-lightweight, standalone, executable package of software that includes everything needed to run an application: code, runtime, system tools, system libraries and settings.
+- standard unit of software that packages up code and all its dependencies
+- based on a Docker image
 
+---
+
+# What is a Docker Image?
+
+lightweight, standalone, executable package of software that includes everything needed to run an application:
+- code
+- runtime
+- system tools and libraries
+- settings
+
+- is a compiled Dockerfile?
+- becomes container at runtime?
+
+---
+
+# What is a Dockerfile?
 - Dockerfile: consists of instructions (read-only layers)
-- Compiled
-- become containers at runtime
 
 ---
 
