@@ -86,7 +86,7 @@ class: impact
 
 # How do create a docker image?
 
-- A docker image is created by building a _dockerfile_
+- A docker image is created by building a _docker file_
 
   ```bash
   $ docker build ./boot-fat-jar -t boot-fat-jar:local
@@ -103,28 +103,81 @@ class: impact
 
 ---
 
-# What is a Dockerfile?
-- script, composed of various commands (instructions)
-- automatically perform actions on a base image in order to create a new one
-- each instruction is a read-only layer
-(add example dockerfile)
+# What is a docker file?
+
+- A docker file is a text file, usually named `Dockerfile`, that contains a set of instructions used to create the docker image, that is, a file-system
+
+- Docker promotes reuse and a _docker file_ can extend another image
+
+  - For example, a _docker file_ hosting a Java application can extend another image that already has the Java Runtime installed and only customises the parts that it needs, rather that starting from scratch
+
+---
+
+# Example of a dockerfile
+
+- Following is a typical `dockerfile` that hosts a Java application
+
+  ```dockerfile
+  FROM adoptopenjdk:8u252-b09-jre-hotspot-bionic
+  WORKDIR /opt/app
+  COPY ./build/libs/*.jar application.jar
+  ENTRYPOINT ["java", "-jar", "application.jar"]
+  ```
+
+- Our example makes use of Java 8, as this is still the most popular version of Java, but will work with any version of Java
+
+---
+
+# Lifecycle
 
 ---
 
 class: impact
 
 # Layers
-(Is this about layers in a Dockerfile?)
+
+
 ---
 
-class: impact
+# Albert put image of layers here
 
-# Fat JAR
+---
+
+# Demo
+- caching
+- build a Docker image
+- Dive
+
+---
+
+# Fat JAR / UberJAR
 - approach to packaging an application
 - includes everything needed to run an app on a standard Java Runtime environment:
-1) dependencies
-2) resources
+1) dependencies (e.g. Spring libraries, DB libraries)
+2) resources (e.g. configurations)
 3) code
+(image that shows size of the layer)
+
+
+---
+
+# Size of Fat JAR
+- 1 commit = 16MB
+- 20 commits (per day) = 320MB
+- 100 commits (per week) = 1,6GB
+(talk about: deleting older images is not a trivial task and requires some thought;
+they might be needed for rollbacks or legal/auditing purposes)
+
+
+---
+
+# The challenge
+(image that shows )
+
+---
+
+# Splitting the dependencies
+(image that shows )
 
 ---
 
@@ -132,17 +185,37 @@ class: impact
 
 # Layered JAR
 
+(solution)
+
 ---
 
 class: impact
 
-# Beyond Spring Boot
+# SpringBoot Layered JAR
 
 ---
 
-# Something else
+# Gradle.build
 
-```dockerfile
+```groovy
+bootJar {
+  layered()
+}
+```
+
+---
+
+class: impact
+
+# Demo SpringBoot layered JAR
+
+(show how this code change is working)
+
+---
+
+# Changes in Dockerfile
+
+```Dockerfile
 FROM adoptopenjdk:8u252-b09-jre-hotspot-bionic as builder
 WORKDIR /opt/app
 COPY ./build/libs/*.jar application.jar
@@ -156,6 +229,96 @@ COPY --from=builder /opt/app/snapshot-dependencies ./
 COPY --from=builder /opt/app/application ./
 ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
 ```
+(multi stage docker build; expand )
+
+---
+
+# Copy the layer JAR
+
+```Dockerfile
+FROM adoptopenjdk:8u252-b09-jre-hotspot-bionic as builder
+WORKDIR /opt/app
+COPY ./build/libs/*.jar application.jar
+```
+
+---
+
+# Extract into layers
+
+```Dockerfile
+RUN java -Djarmode=layertools -jar application.jar extract
+```
+
+---
+
+# Create the working image (need to get a better name)
+
+```Dockerfile
+FROM adoptopenjdk:8u252-b09-jre-hotspot-bionic
+WORKDIR /opt/app
+```
+---
+
+# Copy the layers
+
+```Dockerfile
+COPY --from=builder /opt/app/dependencies ./
+COPY --from=builder /opt/app/spring-boot-loader ./
+COPY --from=builder /opt/app/snapshot-dependencies ./
+COPY --from=builder /opt/app/application ./
+```
+
+# Entrypoint
+
+```Dockerfile
+ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
+```
+
+---
+
+# Demo
+
+- Create the image
+- Inspect with Dive
+
+---
+
+# Comparison
+
+| Commits|Without Layers|With Layers|
+| --: | --: | --: |
+| 1 | 16MB | 20KB |
+
+---
+class: impact
+
+# Beyond Spring Boot
+---
+
+# Beyond Spring Boot
+
+```Dockerfile
+FROM alpine:3.12.0 as builder
+WORKDIR /opt/app
+COPY ./build/distributions/*.zip application.zip
+RUN unzip application.zip \
+    && rm application.zip \
+    ...
+    && mv dist/lib/application.jar dist/app/application.jar
+
+FROM adoptopenjdk:8u252-b09-jre-hotspot-bionic
+ENV APP_HOME /opt/app
+WORKDIR ${APP_HOME}
+COPY --from=builder /opt/app/dist/lib lib/
+...
+ENTRYPOINT ["./bin/run"]
+```
+
+---
+
+# Demo
+
+(Micronaut)
 
 ---
 
@@ -169,6 +332,3 @@ Please send any feedback to: albert.attard@thoughtworks.com or jlang@thoughtwork
 ---
 
 class: careers
-
-
-
