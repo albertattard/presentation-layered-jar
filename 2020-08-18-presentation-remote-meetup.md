@@ -50,6 +50,8 @@ class: impact
 
 .center[![Docker Container](assets/images/Docker Container.png)]
 
+(Not happy with the title, and would like to have something more like _what is docker_ instead)
+
 ---
 
 # How do create a docker container?
@@ -73,21 +75,14 @@ class: impact
 
 ---
 
-# How do create a docker container?
+# What is a docker image?
 
+- A docker image is a file-system that contains
 
+  - The operating system
+  - The programs (such as the Java Runtime Environment)
+  - The application executable, dependencies, and configuration
 
----
-
-# What is a Docker Image?
-
-lightweight, standalone, executable package of software that includes everything needed to run an application:
-- code
-- runtime
-- system tools and libraries
-- settings
-
-- (based on Dockerfile instructions)
 ---
 
 # What is a Dockerfile?
