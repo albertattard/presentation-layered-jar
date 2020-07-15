@@ -269,6 +269,15 @@ class: impact
 
 ---
 
+# Spring Boot
+
+Spring Boot is a very popular framework that promotes productivity
+
+.responsive[![Spring Boot](assets/images/Spring Boot.png)]
+[https://spring.io/projects/spring-boot](https://spring.io/projects/spring-boot)
+
+---
+
 # Layered JAR
 
 - Spring Boot 2.3 comes with a new feature, _Layered JAR_
@@ -312,7 +321,7 @@ class: impact
 
 # How does this work with docker?
 
-- We can take advantage of multi-stage docker builds
+- We can take advantage of multistage docker builds
 
   ```Dockerfile
   FROM adoptopenjdk:8u252-b09-jre-hotspot-bionic as builder
@@ -403,24 +412,48 @@ class: impact
 class: impact
 
 # Beyond Spring Boot
+
 ---
 
-# Beyond Spring Boot
+# Micronaut
+
+Micronaut is reflection free alternative framework to Spring Boot
+
+.responsive[![Micronaut](assets/images/Micronaut.png)]
+[https://micronaut.io/](https://micronaut.io/)
+
+---
+
+# Lack of tooling
+
+- Spring Boot provides the layered JAR functionality as a Gradle task
+
+- This is not available for all other frameworks
+
+- We can take advantage of the docker multistage to split our dependencies from the application
+
+---
+
+# Multistage to the rescue
 
 ```Dockerfile
 FROM alpine:3.12.0 as builder
 WORKDIR /opt/app
 COPY ./build/distributions/*.zip application.zip
-RUN unzip application.zip \
-    && rm application.zip \
-    ...
+RUN unzip application.zip && rm application.zip \
+    && mv * dist && rm dist/bin/*.bat && mv dist/bin/* dist/bin/run.original \
+    && sed 's|$APP_HOME/lib/application.jar|$APP_HOME/app/application.jar|g' dist/bin/run.original > dist/bin/run \
+    && chmod +x dist/bin/run \
+    && rm dist/bin/run.original \
+    && mkdir dist/app \
     && mv dist/lib/application.jar dist/app/application.jar
 
 FROM adoptopenjdk:8u252-b09-jre-hotspot-bionic
 ENV APP_HOME /opt/app
 WORKDIR ${APP_HOME}
 COPY --from=builder /opt/app/dist/lib lib/
-...
+COPY --from=builder /opt/app/dist/bin bin/
+COPY --from=builder /opt/app/dist/app app/
 ENTRYPOINT ["./bin/run"]
 ```
 
