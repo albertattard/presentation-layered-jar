@@ -347,3 +347,19 @@ This demo can work with newer version of Java too.
 
 1. [Google JIB](https://github.com/GoogleContainerTools/jib)
 1. [Buildpacks](https://docs.cloudfoundry.org/buildpacks/)
+
+## Docker commands
+
+Useful docker commands
+
+1. List local images
+
+   ```bash
+   $ docker image ls
+   ```
+
+1. Delete all local images and containers
+
+   ```bash
+   $ docker rm $(docker ps -a -q) && docker rmi $(docker images -a -q)
+   ```

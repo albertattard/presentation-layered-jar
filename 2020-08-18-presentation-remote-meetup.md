@@ -142,10 +142,9 @@ class: impact
 
 # Layers
 
-
 ---
 
-# Albert put image of layers here
+# What are layers?
 
 - Consider the following `Dockerfile`
 
@@ -171,9 +170,10 @@ class: impact
 ---
 
 # Demo
-- caching
-- build a Docker image
-- Dive
+
+- Build a docker image
+- Discuss layers and see docker takes advantage of caching
+- Analyse the docker image, using `dive`
 
 ---
 
