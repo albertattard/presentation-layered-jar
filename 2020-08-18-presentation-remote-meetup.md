@@ -75,11 +75,15 @@ class: impact
 
 # What is a docker image?
 
-- A docker image is a file-system that contains
+- A docker image is a **read-only** file-system that contains
 
   - The operating system
   - The programs needed by the application, such as the Java Runtime Environment
   - The application executable, dependencies, and configuration
+
+- A docker image is immutable and cannot be modified once built
+
+- A new docker image is created every time a new version of our application is dockerized
 ---
 
 # How do create a docker image?
@@ -89,6 +93,8 @@ class: impact
   ```bash
   $ docker build . -t boot-fat-jar:local
   ```
+
+  The above command creates a docker image and tags it as `boot-fat-jar:local`
 
 - We can run the docker image (creating a docker container) once this is built
 
