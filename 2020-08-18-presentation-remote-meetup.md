@@ -180,19 +180,36 @@ class: impact
 
 ---
 
-# Fat JAR / UberJAR
-- approach to packaging an application
-- includes everything needed to run an app on a standard Java Runtime environment:
+# FatJAR / UberJAR
 
-    1. dependencies (e.g. Spring libraries, DB libraries)
-    2. resources (e.g. configurations)
-    3. code
-(image that shows size of the layer)
+- A very common way to package a Java application is to create a FatJAR (or as also known an _UberJAR_)
 
+- A FatJAR contains
+  - Our application
+  - All dependencies (JARs)
+
+- A FatJAR is standalone and can be executed using `java -jar ...`
+
+  ```bash
+  $ java -jar application.jar
+  ```
 
 ---
 
-# Size of Fat JAR
+# FatJAR and docker image
+
+- Our docker file copies the FatJAR
+
+  ```dockerfile
+  COPY ./build/libs/*.jar application.jar
+  ```
+
+- This creates a new layer every time a new FatJAR file is created
+
+---
+
+# Size of FatJAR
+
 - 1 commit = 16MB
 - 20 commits (per day) = 320MB
 - 100 commits (per week) = 1,6GB
