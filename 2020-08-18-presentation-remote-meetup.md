@@ -63,20 +63,27 @@ lightweight, standalone, executable package of software that includes everything
 ---
 
 # What is a Dockerfile?
-- text document that consists of instructions
+- script, composed of various commands (instructions)
+- automatically perform actions on a base image in order to create a new one
 - each instruction is a read-only layer
+(add example dockerfile)
 
 ---
 
 class: impact
 
 # Layers
-
+(Is this about layers in a Dockerfile?)
 ---
 
 class: impact
 
 # Fat JAR
+- approach to packaging an application
+- includes everything needed to run an app on a standard Java Runtime environment:
+1) dependencies
+2) resources
+3) code
 
 ---
 
