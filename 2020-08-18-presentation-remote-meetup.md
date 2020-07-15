@@ -48,7 +48,7 @@ class: impact
 
 - A standard deployment unit that encapsulates an application all its dependencies
 
-.center[![Docker Container](assets/images/Docker Container.png)]
+.responsive[![Docker Container](assets/images/Docker Container.png)]
 
 (Not happy with the title, and would like to have something more like _what is docker_ instead)
 
@@ -69,9 +69,7 @@ class: impact
 
 ---
 
-# Playing a game
-
-.center[![Quantum Game with Photons](assets/images/Quantum%20Game%20with%20Photons.png)]
+.responsive[![Quantum Game with Photons](assets/images/Quantum%20Game%20with%20Photons.png)]
 
 ---
 
@@ -129,6 +127,8 @@ class: impact
 ---
 
 # Lifecycle
+
+.responsive[![Docker Lifecycle](assets/images/Docker Lifecycle.png)]
 
 ---
 
