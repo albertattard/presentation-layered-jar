@@ -59,13 +59,12 @@ lightweight, standalone, executable package of software that includes everything
 - system tools and libraries
 - settings
 
-- is a compiled Dockerfile?
-- becomes container at runtime?
-
+- (based on Dockerfile instructions)
 ---
 
 # What is a Dockerfile?
-- Dockerfile: consists of instructions (read-only layers)
+- text document that consists of instructions
+- each instruction is a read-only layer
 
 ---
 
