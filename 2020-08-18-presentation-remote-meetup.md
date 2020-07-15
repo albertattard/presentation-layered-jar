@@ -171,11 +171,12 @@ class: impact
 # Demo
 
 - Build a docker image
+
 - Discuss layers and see docker takes advantage of caching
+
 - Analyse the docker image, using `dive`
 
-
-(Demo 1 - Build docker image and analyse layers with dive.mp4)
+[▶️ Demo](assets/demo/Demo 1 - Build docker image and analyse layers with dive.mp4)
 
 ---
 
@@ -296,89 +297,107 @@ class: impact
 
 ---
 
-class: impact
+# Demo
 
-# Demo SpringBoot layered JAR
+- Build layered JAR
 
-(show how this code change is working)
+- Extract Layered JAR
 
----
+- Run Extracted JAR
 
-# Changes in Dockerfile
-
-```Dockerfile
-FROM adoptopenjdk:8u252-b09-jre-hotspot-bionic as builder
-WORKDIR /opt/app
-COPY ./build/libs/*.jar application.jar
-RUN java -Djarmode=layertools -jar application.jar extract
-
-FROM adoptopenjdk:8u252-b09-jre-hotspot-bionic
-WORKDIR /opt/app
-COPY --from=builder /opt/app/dependencies ./
-COPY --from=builder /opt/app/spring-boot-loader ./
-COPY --from=builder /opt/app/snapshot-dependencies ./
-COPY --from=builder /opt/app/application ./
-ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
-```
-(multi stage docker build; expand )
+[▶️ Demo](assets/demo/Demo 2 - Build layered JAR, extract it and run extracted JAR.mp4)
+(Still pending!!)
 
 ---
 
-# Copy the layer JAR
+# How does this work with docker?
 
-```Dockerfile
-FROM adoptopenjdk:8u252-b09-jre-hotspot-bionic as builder
-WORKDIR /opt/app
-COPY ./build/libs/*.jar application.jar
-```
+- We can take advantage of multi-stage docker builds
+
+  ```Dockerfile
+  FROM adoptopenjdk:8u252-b09-jre-hotspot-bionic as builder
+  WORKDIR /opt/app
+  COPY ./build/libs/*.jar application.jar
+  RUN java -Djarmode=layertools -jar application.jar extract
+
+  FROM adoptopenjdk:8u252-b09-jre-hotspot-bionic
+  WORKDIR /opt/app
+  COPY --from=builder /opt/app/dependencies ./
+  COPY --from=builder /opt/app/spring-boot-loader ./
+  COPY --from=builder /opt/app/snapshot-dependencies ./
+  COPY --from=builder /opt/app/application ./
+  ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
+  ```
 
 ---
 
-# Extract into layers
+# Builder stage
 
-```Dockerfile
-RUN java -Djarmode=layertools -jar application.jar extract
-```
+- Copy the layered JAR created by Gradle
+
+  ```Dockerfile
+  FROM adoptopenjdk:8u252-b09-jre-hotspot-bionic as builder
+  WORKDIR /opt/app
+  COPY ./build/libs/*.jar application.jar
+  ```
+
+- Extract the layered JAR
+
+  ```Dockerfile
+  RUN java -Djarmode=layertools -jar application.jar extract
+  ```
+
+  This command will create four folders in the builder stage, which we can copy from in the final stage
 
 ---
 
-# Create the working image (need to get a better name)
+# Final stage
 
-```Dockerfile
-FROM adoptopenjdk:8u252-b09-jre-hotspot-bionic
-WORKDIR /opt/app
-```
----
+- Starts with a Java image
 
-# Copy the layers
+  ```Dockerfile
+  FROM adoptopenjdk:8u252-b09-jre-hotspot-bionic
+  WORKDIR /opt/app
+  ```
 
-```Dockerfile
-COPY --from=builder /opt/app/dependencies ./
-COPY --from=builder /opt/app/spring-boot-loader ./
-COPY --from=builder /opt/app/snapshot-dependencies ./
-COPY --from=builder /opt/app/application ./
-```
+- Copy the extracted folders from the buidler stage
 
-# Entrypoint
+  ```Dockerfile
+  COPY --from=builder /opt/app/dependencies ./
+  COPY --from=builder /opt/app/spring-boot-loader ./
+  COPY --from=builder /opt/app/snapshot-dependencies ./
+  COPY --from=builder /opt/app/application ./
+  ```
 
-```Dockerfile
-ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
-```
+- Use the `JarLauncher`
+
+  ```Dockerfile
+  ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
+  ```
 
 ---
 
 # Demo
 
-- Create the image
+- Create docker image (using multistage and layered JAR)
 - Inspect with Dive
+
+[▶️ Demo](assets/demo/Demo 3 - Create docker image using layered JAR and analyse it with dive.mp4)
+(Still pending!!)
+
+---
+
+# Size of Layered JAR
+
+.responsive[![Size of Layered JAR](assets/images/Size of Layered JAR.png)]
 
 ---
 
 # Comparison
 
-| Commits|Without Layers|With Layers|
-| --: | --: | --: |
-| 1 | 16MB | 20KB |
+- Comparing these two approaches we will find that a layered JAR is far more efficient than a FatJAR
+
+.responsive[![Comparing Layer Sizes](assets/images/Comparing Layer Sizes.png)]
 
 ---
 class: impact
