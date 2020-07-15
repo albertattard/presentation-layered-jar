@@ -206,16 +206,26 @@ class: impact
 
 - This creates a new layer every time a new FatJAR file is created
 
+- Creating many large layers may consume large amounts of disk space
+
 ---
 
 # Size of FatJAR
 
-- 1 commit = 16MB
-- 20 commits (per day) = 320MB
-- 100 commits (per week) = 1,6GB
+.responsive[![Size of FatJAR](assets/images/Size of FatJAR.png)]
+
+---
+
+# Space requirements
+
+- Consider a relatively active team working 5 days a week and committing 20 times per day
+
+- Each commit is followed by a push, which triggers an automated build pipeline, which builds the application and creates a new docker image
+
+.responsive[![Size required after a week FatJAR.png](assets/images/Size required after a week FatJAR.png)]
+
 (talk about: deleting older images is not a trivial task and requires some thought;
 they might be needed for rollbacks or legal/auditing purposes)
-
 
 ---
 
