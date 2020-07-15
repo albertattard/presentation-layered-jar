@@ -87,7 +87,7 @@ class: impact
 - A docker image is created by building a _docker file_
 
   ```bash
-  $ docker build ./boot-fat-jar -t boot-fat-jar:local
+  $ docker build . -t boot-fat-jar:local
   ```
 
 - We can run the docker image (creating a docker container) once this is built
@@ -140,6 +140,27 @@ class: impact
 ---
 
 # Albert put image of layers here
+
+- Consider the following `Dockerfile`
+
+  ```dockerfile
+  FROM adoptopenjdk:8u252-b09-jre-hotspot-bionic
+  WORKDIR /opt/app
+  COPY ./build/libs/*.jar application.jar
+  ENTRYPOINT ["java", "-jar", "application.jar"]
+  ```
+
+- The above docker file has four layers
+  - `FROM ...`
+  - `WORKDIR ...`
+  - `COPY ...`
+  - `ENTRYPOINT ...`
+
+---
+
+# Intermediate Images
+
+.responsive[![Docker Layers](assets/images/Docker%20Layers.png)]
 
 ---
 

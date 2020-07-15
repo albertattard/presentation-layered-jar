@@ -53,7 +53,8 @@ blockquote {
 // Remark base
 // ---------------------------------------------------------------------------
 
-.remark-code { font-size: .9em; }
+.remark-code { font-size: .7em; font-family: monospace }
+.remark-inline-code { font-size: 1em; font-family: monospace }
 .remark-container { background: $dark; }
 .remark-slide-scaler { box-shadow: none; }
 .remark-notes { font-size: 1.5em; }
