@@ -175,6 +175,9 @@ class: impact
 - Discuss layers and see docker takes advantage of caching
 - Analyse the docker image, using `dive`
 
+
+(Demo 1 - Build docker image and analyse layers with dive.mp4)
+
 ---
 
 # Fat JAR / UberJAR
