@@ -153,9 +153,10 @@ class: impact
 # Fat JAR / UberJAR
 - approach to packaging an application
 - includes everything needed to run an app on a standard Java Runtime environment:
-1) dependencies (e.g. Spring libraries, DB libraries)
-2) resources (e.g. configurations)
-3) code
+
+    1. dependencies (e.g. Spring libraries, DB libraries)
+    2. resources (e.g. configurations)
+    3. code
 (image that shows size of the layer)
 
 
