@@ -59,7 +59,7 @@ class: impact
 - A docker container is created every time we run a _docker image_
 
   ```bash
-  $ docker run -d --rm \
+  $ docker run --rm \
      --name docker-container-demo \
      -p 8080:8080 \
      spkane/quantum-game:latest
@@ -80,8 +80,26 @@ class: impact
 - A docker image is a file-system that contains
 
   - The operating system
-  - The programs (such as the Java Runtime Environment)
+  - The programs needed by the application, such as the Java Runtime Environment
   - The application executable, dependencies, and configuration
+---
+
+# How do create a docker image?
+
+- A docker image is created by building a _dockerfile_
+
+  ```bash
+  $ docker build ./boot-fat-jar -t boot-fat-jar:local
+  ```
+
+- We can run the docker image (creating a docker container) once this is built
+
+  ```bash
+  $ docker run --rm \
+     --name boot-fat-jar-demo \
+     -p 8080:8080 \
+     boot-fat-jar:local
+  ```
 
 ---
 
