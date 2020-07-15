@@ -32,8 +32,7 @@ class: impact
 
 ## Docker
 ## Layers
-## Fat JAR
-## Layered JAR
+## Spring Boot
 ## Beyond Spring Boot
 
 ---
@@ -265,23 +264,35 @@ they might be needed for rollbacks or legal/auditing purposes)
 
 class: impact
 
+# Spring Boot
+
+---
+
 # Layered JAR
 
+- Spring Boot 2.3 comes with a new feature, _Layered JAR_
+
+- This can be enabled by simply adding a configuration to the `build.gradle`
+
+  ```groovy
+  bootJar {
+      layered()
+  }
+  ```
+
+  An equivalent plugin is available for Maven too
+
 ---
 
-class: impact
+# How does this work?
 
-# SpringBoot Layered JAR
+- Gradle builds our Layered JAR
 
----
+- Extract the Layered JAR
 
-# Gradle.build
+- Run the Extracted JAR
 
-```groovy
-bootJar {
-  layered()
-}
-```
+.responsive[![From Code to Extracted JAR](assets/images/From Code to Extracted JAR.png)]
 
 ---
 
