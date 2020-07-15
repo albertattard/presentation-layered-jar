@@ -46,8 +46,22 @@ class: impact
 
 # What is a container?
 
-- standard unit of software that packages up code and all its dependencies
-- based on a Docker image
+- A standard unit of software that packages up code and all its dependencies
+
+.center[![Docker Container](assets/images/Docker Container.png)]
+
+---
+
+# Playing a game
+
+```bash
+$ docker run -d --rm \
+  --name docker-container-demo \
+  -p 8080:8080 \
+  spkane/quantum-game:latest
+```
+
+![Quantum Game with Photons](assets/images/Quantum%20Game%20with%20Photons.png)
 
 ---
 
