@@ -46,15 +46,15 @@ class: impact
 
 # What is a container?
 
-- A standard unit of software that packages up code and all its dependencies
+- A standard deployment unit that encapsulates an application all its dependencies
 
 .center[![Docker Container](assets/images/Docker Container.png)]
 
 ---
 
-# Running a container
+# How do create a docker container?
 
-- We can run a docker container using the docker run command
+- A docker container is created every time we run a _docker image_
 
   ```bash
   $ docker run -d --rm \
@@ -63,15 +63,19 @@ class: impact
      spkane/quantum-game:latest
   ```
 
-- The above command will start a game, which we can play
-
-- We don't have to worry about any specific runtime environment or any particular dependency version
+- We don't have to worry about any specific runtime environment or any particular dependency version as everything is encapsulated in the container
 
 ---
 
 # Playing a game
 
 .center[![Quantum Game with Photons](assets/images/Quantum%20Game%20with%20Photons.png)]
+
+---
+
+# How do create a docker container?
+
+
 
 ---
 
