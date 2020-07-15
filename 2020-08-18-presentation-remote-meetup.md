@@ -230,20 +230,42 @@ they might be needed for rollbacks or legal/auditing purposes)
 ---
 
 # The challenge
-(image that shows )
+
+- Our application comprise our code and its dependencies
+
+- When new features are added, the dependencies are not neccessarly updated
+
+- One small change in the code, creates a new docker layer of about 16MB in size
+
+---
+
+# The challenge
+
+.responsive[![FatJAR Layers](assets/images/FatJAR Layers.png)]
+
+(Should we have a quick demo here showing that the first two intermediate layers are cached but the third and the subsequent layers are not?)
 
 ---
 
 # Splitting the dependencies
-(image that shows )
+
+- Instead of using a FatJAR, we can split the dependencies
+
+- We will have more than one docker `COPY` command, with our application copied last
+
+- Changes to our application will simply require a thinner layer to be created
+
+---
+
+# Splitting the dependencies
+
+.responsive[![Split Dependencies Layers](assets/images/Split Dependencies Layers.png)]
 
 ---
 
 class: impact
 
 # Layered JAR
-
-(solution)
 
 ---
 
