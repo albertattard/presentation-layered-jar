@@ -74,7 +74,7 @@ class: impact
 
 # What is a docker image?
 
-- A docker image is a **read-only** file-system that contains
+- A docker image is a **read-only** filesystem that contains
 
   - The operating system
   - The programs needed by the application, such as the Java Runtime Environment
@@ -108,7 +108,7 @@ class: impact
 
 # What is a docker file?
 
-- A docker file is a text file, usually named `Dockerfile`, that contains a set of instructions used to create the docker image, that is, a file-system
+- A docker file is a text file, usually named `Dockerfile`, that contains a set of instructions used to create the docker image, that is, a filesystem
 
 - Docker promotes reuse and a _docker file_ can extend another image
 
@@ -116,9 +116,9 @@ class: impact
 
 ---
 
-# Example of a dockerfile
+# Example of a docker file
 
-- Following is a typical `dockerfile` that hosts a Java application
+- Following is a typical _docker file_ that hosts a Java application
 
   ```dockerfile
   FROM adoptopenjdk:8u252-b09-jre-hotspot-bionic
@@ -145,7 +145,7 @@ class: impact
 
 # What are layers?
 
-- Consider the following `Dockerfile`
+- Consider the following _docker file_
 
   ```dockerfile
   FROM adoptopenjdk:8u252-b09-jre-hotspot-bionic
@@ -182,7 +182,7 @@ class: impact
 
 # FatJAR / UberJAR
 
-- A very common way to package a Java application is to create a FatJAR (or as also known an _UberJAR_)
+- A very common way to package a Java application is to create a FatJAR (also known as _UberJAR_)
 
 - A FatJAR contains
   - Our application
@@ -224,16 +224,16 @@ class: impact
 
 .responsive[![Size required after a week FatJAR.png](assets/images/Size required after a week FatJAR.png)]
 
-(talk about: deleting older images is not a trivial task and requires some thought;
+(talk about deleting older images is not a trivial task and requires some thought;
 they might be needed for rollbacks or legal/auditing purposes)
 
 ---
 
 # The challenge
 
-- Our application comprise our code and its dependencies
+- Our application comprises our code and its dependencies
 
-- When new features are added, the dependencies are not neccessarly updated
+- When new features are added, the dependencies are not necessarily updated
 
 - One small change in the code, creates a new docker layer of about 16MB in size
 
@@ -282,7 +282,7 @@ Spring Boot is a very popular framework that promotes productivity
 
 - Spring Boot 2.3 comes with a new feature, _Layered JAR_
 
-- This can be enabled by simply adding a configuration to the `build.gradle`
+- This can be enabled by simply adding a configuration to the Gradle `build.gradle` file
 
   ```groovy
   bootJar {
@@ -323,7 +323,7 @@ Spring Boot is a very popular framework that promotes productivity
 
 - We can take advantage of multistage docker builds
 
-  ```Dockerfile
+  ```dockerfile
   FROM adoptopenjdk:8u252-b09-jre-hotspot-bionic as builder
   WORKDIR /opt/app
   COPY ./build/libs/*.jar application.jar
@@ -369,7 +369,7 @@ Spring Boot is a very popular framework that promotes productivity
   WORKDIR /opt/app
   ```
 
-- Copy the extracted folders from the buidler stage
+- Copy the extracted folders from the builder stage
 
   ```Dockerfile
   COPY --from=builder /opt/app/dependencies ./
