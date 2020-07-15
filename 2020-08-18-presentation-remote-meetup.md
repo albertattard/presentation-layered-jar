@@ -52,16 +52,26 @@ class: impact
 
 ---
 
+# Running a container
+
+- We can run a docker container using the docker run command
+
+  ```bash
+  $ docker run -d --rm \
+     --name docker-container-demo \
+     -p 8080:8080 \
+     spkane/quantum-game:latest
+  ```
+
+- The above command will start a game, which we can play
+
+- We don't have to worry about any specific runtime environment or any particular dependency version
+
+---
+
 # Playing a game
 
-```bash
-$ docker run -d --rm \
-  --name docker-container-demo \
-  -p 8080:8080 \
-  spkane/quantum-game:latest
-```
-
-![Quantum Game with Photons](assets/images/Quantum%20Game%20with%20Photons.png)
+.center[![Quantum Game with Photons](assets/images/Quantum%20Game%20with%20Photons.png)]
 
 ---
 
