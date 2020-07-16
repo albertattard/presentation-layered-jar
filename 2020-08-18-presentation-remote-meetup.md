@@ -43,9 +43,9 @@ class: impact
 
 ---
 
-# What is a container?
+# What is a Docker container?
 
-- A standard deployment unit that encapsulates an application all its dependencies
+- A standard deployment unit that encapsulates an application and all its dependencies
 
 .responsive[![Docker Container](assets/images/Docker Container.png)]
 
@@ -53,7 +53,7 @@ class: impact
 
 ---
 
-# How do create a docker container?
+# How to create a Docker container?
 
 - A docker container is created every time we run a _docker image_
 
@@ -72,22 +72,22 @@ class: impact
 
 ---
 
-# What is a docker image?
+# What is a Docker image?
 
-- A docker image is a **read-only** filesystem that contains
+- **read-only** filesystem that contains
 
-  - The operating system
-  - The programs needed by the application, such as the Java Runtime Environment
-  - The application executable, dependencies, and configuration
+  - operating system
+  - programs needed by the application (e.g. Java Runtime Environment)
+  - application executable, dependencies, and configuration
 
-- A docker image is immutable and cannot be modified once built
+- immutable (cannot be modified once built)
 
-- A new docker image is created every time a new version of our application is dockerized
+- new image gets created every time a new version of our application is dockerized
 ---
 
-# How do create a docker image?
+# How to create a Docker image?
 
-- A docker image is created by building a _docker file_
+- by building a _Dockerfile_
 
   ```bash
   $ docker build . -t boot-fat-jar:local
@@ -106,19 +106,19 @@ class: impact
 
 ---
 
-# What is a docker file?
+# What is a Dockerfile?
 
-- A docker file is a text file, usually named `Dockerfile`, that contains a set of instructions used to create the docker image, that is, a filesystem
+- text file, usually named `Dockerfile`, that contains a set of instructions used to create the Docker image
 
-- Docker promotes reuse and a _docker file_ can extend another image
+- Docker promotes reuse and a _Dockerfile_ can extend another image
 
-  - For example, a _docker file_ hosting a Java application can extend another image that already has the Java Runtime installed and only customises the parts that it needs, rather that starting from scratch
+  - For example, a _Dockerfile_ hosting a Java application can extend another image that already has the Java Runtime installed and only customises the parts that it needs, rather that starting from scratch
 
 ---
 
-# Example of a docker file
+# Example of a Dockerfile
 
-- Following is a typical _docker file_ that hosts a Java application
+- Following is a typical _Dockerfile_ that hosts a Java application
 
   ```dockerfile
   FROM adoptopenjdk:8u252-b09-jre-hotspot-bionic
@@ -145,7 +145,7 @@ class: impact
 
 # What are layers?
 
-- Consider the following _docker file_
+- Consider the following _Dockerfile_
 
   ```dockerfile
   FROM adoptopenjdk:8u252-b09-jre-hotspot-bionic
