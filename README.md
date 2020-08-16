@@ -363,3 +363,29 @@ Useful docker commands
    ```bash
    $ docker rm $(docker ps -a -q) && docker rmi $(docker images -a -q)
    ```
+
+1. Build Docker image
+
+   ```bash
+   $ docker build . -t <image-tag>
+   ```
+
+1. Run Docker image
+
+   ```bash
+   $ docker run \
+       -it \
+       --rm \
+       --name <container-name> \
+       -p 8080:8080
+       -d \
+       <image-tag>
+   ```
+
+1. Login to a running Docker container
+
+   ```bash
+   $ docker exec \
+       -it <container-name> \
+       /bin/bash
+   ```
