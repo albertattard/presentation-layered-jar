@@ -49,11 +49,11 @@ class: impact
 
 .responsive[![Docker Container](assets/images/Docker Container.png)]
 
-(Not happy with the title, and would like to have something more like _what is docker_ instead)
+[//]: # (Not happy with the title, and would like to have something more like _what is docker_ instead)
 
 ---
 
-# How to create a Docker container?
+# How is a Docker container created?
 
 - A docker container is created every time we run a _docker image_
 
@@ -74,28 +74,29 @@ class: impact
 
 # What is a Docker image?
 
-- **read-only** filesystem that contains
+- A **read-only** filesystem that contains
 
-  - operating system
-  - programs needed by the application (e.g. Java Runtime Environment)
-  - application executable, dependencies, and configuration
+  - The operating system
+  - The programs needed by the application (e.g. Java Runtime Environment)
+  - The application executable, its dependencies, and configuration
 
-- immutable (cannot be modified once built)
+- Immutable (cannot be modified once built)
 
-- new image gets created **every time** a new version of our application is dockerized
+- New image gets created **every time** a new version of our application is dockerized
+
 ---
 
-# How to create a Docker image?
+# How is a Docker image created?
 
-- by building a _Dockerfile_
+- A Docker image is created when a _Dockerfile_ is built
 
   ```bash
   $ docker build . -t boot-fat-jar:local
   ```
 
-  The above command creates a docker image and tags it as `boot-fat-jar:local`
+  The above command creates a Docker image and tags it as `boot-fat-jar:local`
 
-- We can run the docker image (creating a docker container) once this is built
+- We can run this Docker image (creating a Docker container when doing so) once this is built
 
   ```bash
   $ docker run --rm \
@@ -104,11 +105,15 @@ class: impact
      boot-fat-jar:local
   ```
 
+[//]: # (`--rm` [Clean up](https://docs.docker.com/engine/reference/run/#clean-up---rm)/deletes the container once the container stops))
+[//]: # (`--name` [Name](https://docs.docker.com/engine/reference/run/#name---name) the container)
+[//]: # (`-p` binds a port on the host to a port on the container)
+
 ---
 
 # What is a Dockerfile?
 
-- text file, usually named `Dockerfile`, that contains a set of instructions used to create the Docker image
+- A text file, usually named `Dockerfile`, that contains a set of instructions used to create the Docker image
 
 - Docker promotes reuse and a _Dockerfile_ can extend another image
 
@@ -121,13 +126,13 @@ class: impact
 - Following is a typical _Dockerfile_ that hosts a Java application
 
   ```dockerfile
-  FROM adoptopenjdk:8u252-b09-jre-hotspot-bionic
+  FROM adoptopenjdk:8u262-b10-jre-hotspot
   WORKDIR /opt/app
   COPY ./build/libs/*.jar application.jar
   ENTRYPOINT ["java", "-jar", "application.jar"]
   ```
 
-- Our example makes use of Java 8, as this is still the most popular version of Java, but will work with any version of Java
+- Our example makes use of Java 8, as this is still the most popular version of Java to date, but will work with newer versions of Java
 
 ---
 
@@ -148,7 +153,7 @@ class: impact
 - Consider the following _Dockerfile_
 
   ```dockerfile
-  FROM adoptopenjdk:8u252-b09-jre-hotspot-bionic
+  FROM adoptopenjdk:8u262-b10-jre-hotspot
   WORKDIR /opt/app
   COPY ./build/libs/*.jar application.jar
   ENTRYPOINT ["java", "-jar", "application.jar"]
@@ -186,9 +191,9 @@ class: impact
 
 - A FatJAR contains
   - Our application
-  - All dependencies (JARs)
+  - All its dependencies (JARs)
 
-- A FatJAR is standalone and can be executed using `java -jar ...`
+- A FatJAR is standalone and can be executed using `java -jar ...`, as shown next
 
   ```bash
   $ java -jar application.jar
@@ -196,9 +201,9 @@ class: impact
 
 ---
 
-# FatJAR and docker image
+# FatJAR and Docker image
 
-- Our docker file copies the FatJAR
+- The FatJAR is copied from our laptop into the Docker image using the `COPY` instruction, as shown next
 
   ```dockerfile
   COPY ./build/libs/*.jar application.jar
@@ -224,8 +229,7 @@ class: impact
 
 .responsive[![Size required after a week FatJAR.png](assets/images/Size required after a week FatJAR.png)]
 
-(talk about deleting older images is not a trivial task and requires some thought;
-they might be needed for rollbacks or legal/auditing purposes)
+[//]: # (Talk about deleting older images is not a trivial task and requires some thought; they might be needed for rollbacks or legal/auditing purposes)
 
 ---
 
@@ -239,11 +243,29 @@ they might be needed for rollbacks or legal/auditing purposes)
 
 ---
 
-# The challenge
+# The challenge - Version 1
 
-.responsive[![FatJAR Layers](assets/images/FatJAR Layers.png)]
+.responsive[![FatJAR Layers](assets/images/FatJAR Layers - V1.png)]
 
-(Should we have a quick demo here showing that the first two intermediate layers are cached but the third and the subsequent layers are not?)
+[//]: # (Should we have a quick demo here showing that the first two intermediate layers are cached but the third and the subsequent layers are not?)
+
+---
+
+# The challenge - Version 2
+
+.responsive[![FatJAR Layers](assets/images/FatJAR Layers - V2.png)]
+
+---
+
+# The challenge - Version 3
+
+.responsive[![FatJAR Layers](assets/images/FatJAR Layers - V3.png)]
+
+---
+
+# The challenge - Version 4
+
+.responsive[![FatJAR Layers](assets/images/FatJAR Layers - V4.png)]
 
 ---
 
@@ -286,7 +308,7 @@ Spring Boot is a very popular framework that promotes productivity
 
   ```groovy
   bootJar {
-      layered()
+    layered()
   }
   ```
 
@@ -324,12 +346,12 @@ Spring Boot is a very popular framework that promotes productivity
 - We can take advantage of multistage docker builds
 
   ```dockerfile
-  FROM adoptopenjdk:8u252-b09-jre-hotspot-bionic as builder
+  FROM adoptopenjdk:8u262-b10-jre-hotspot as builder
   WORKDIR /opt/app
   COPY ./build/libs/*.jar application.jar
   RUN java -Djarmode=layertools -jar application.jar extract
 
-  FROM adoptopenjdk:8u252-b09-jre-hotspot-bionic
+  FROM adoptopenjdk:8u262-b10-jre-hotspot
   WORKDIR /opt/app
   COPY --from=builder /opt/app/dependencies ./
   COPY --from=builder /opt/app/spring-boot-loader ./
@@ -345,7 +367,7 @@ Spring Boot is a very popular framework that promotes productivity
 - Copy the layered JAR created by Gradle
 
   ```Dockerfile
-  FROM adoptopenjdk:8u252-b09-jre-hotspot-bionic as builder
+  FROM adoptopenjdk:8u262-b10-jre-hotspot as builder
   WORKDIR /opt/app
   COPY ./build/libs/*.jar application.jar
   ```
@@ -365,7 +387,7 @@ Spring Boot is a very popular framework that promotes productivity
 - Starts with a Java image
 
   ```Dockerfile
-  FROM adoptopenjdk:8u252-b09-jre-hotspot-bionic
+  FROM adoptopenjdk:8u262-b10-jre-hotspot
   WORKDIR /opt/app
   ```
 
@@ -462,7 +484,7 @@ RUN unzip application.zip && rm application.zip \
     && mkdir dist/app \
     && mv dist/lib/application.jar dist/app/application.jar
 
-FROM adoptopenjdk:8u252-b09-jre-hotspot-bionic
+FROM adoptopenjdk:8u262-b10-jre-hotspot
 ENV APP_HOME /opt/app
 WORKDIR ${APP_HOME}
 COPY --from=builder /opt/app/dist/lib lib/

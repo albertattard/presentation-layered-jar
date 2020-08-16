@@ -12,7 +12,7 @@ RUN unzip application.zip \
     && mkdir dist/app \
     && mv dist/lib/application.jar dist/app/application.jar
 
-FROM adoptopenjdk:8u252-b09-jre-hotspot-bionic
+FROM adoptopenjdk:8u262-b10-jre-hotspot
 ENV APP_HOME /opt/app
 WORKDIR ${APP_HOME}
 COPY --from=builder /opt/app/dist/lib lib/

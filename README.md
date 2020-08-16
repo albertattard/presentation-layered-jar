@@ -9,7 +9,7 @@ Java 8 is used in this demo as this is the most popular version of Java followed
 
 ![Java Version](https://www.jrebel.com/sites/rebel/files/image/2020-01/5.%20what%20java%20programming%20language%20are%20you%20using%20in%20main%20application.png)
 
-This demo can work with newer version of Java too.
+This demo can work with newer versions of Java too.
 
 ## Examples
 
