@@ -1,6 +1,6 @@
 # Demo 1
 
-Build docker image and analyse layers with dive
+Build Docker image and analyse layers with dive
 
 1. Build the project
 
@@ -8,18 +8,20 @@ Build docker image and analyse layers with dive
    $ ./gradlew boot-fat-jar:clean boot-fat-jar:build
    ```
 
-1.
+1. Navigate to the project directory
 
 
    ```bash
    $ cd boot-fat-jar
    ```
 
-1.
+1. Analyse the `Dockerfile`
 
    ```bash
    $ vi Dockerfile
    ```
+
+   The `Dockerfile` contains the following instructions
 
    ```dockerfile
    FROM adoptopenjdk:8u262-b10-jre-hotspot
@@ -28,35 +30,39 @@ Build docker image and analyse layers with dive
    ENTRYPOINT ["java", "-jar", "application.jar"]
    ```
 
-   1.
+   1. Extends from an existing Java image
 
       ```dockerfile
       FROM adoptopenjdk:8u262-b10-jre-hotspot
       ```
 
-   1.
+   1. Create a directory where the application will be copied to
 
       ```dockerfile
       WORKDIR /opt/app
       ```
 
-   1.
+      The application will be started from this directory
+
+   1. Copy the FatJAR file from the laptop to the Docker image
 
       ```dockerfile
       COPY ./build/libs/*.jar application.jar
       ```
 
-   1.
+   1. Set the command that will be executed when the Docker container starts
 
       ```dockerfile
       ENTRYPOINT ["java", "-jar", "application.jar"]
       ```
 
-1.
+1. Build the Docker image for the first time
 
    ```bash
    $ docker build . -t boot-fat-jar:local
    ```
+
+   Docker will download Java image and build the other three layers
 
    ```bash
    Sending build context to Docker daemon  16.67MB
@@ -85,11 +91,13 @@ Build docker image and analyse layers with dive
    Successfully tagged boot-fat-jar:local
    ```
 
-1.
+1. Building the Docker image again, without changing anything
 
    ```bash
    $ docker build . -t boot-fat-jar:local
    ```
+
+   This time the build will go very quickly as Docker takes advantage of cache
 
    ```bash
    Sending build context to Docker daemon  16.67MB
@@ -108,7 +116,7 @@ Build docker image and analyse layers with dive
    Successfully tagged boot-fat-jar:local
    ```
 
-1.
+1. Investigate the Docker image using `dive`
 
    ```bash
    $ dive boot-fat-jar:local
