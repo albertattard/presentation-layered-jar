@@ -1,5 +1,7 @@
 # Demo 2
 
+Build layered JAR, extract it and run extracted JAR
+
 1. Build the project
 
    ```bash
