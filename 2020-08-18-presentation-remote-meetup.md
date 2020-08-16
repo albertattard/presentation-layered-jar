@@ -269,19 +269,41 @@ class: impact
 
 ---
 
-# Splitting the dependencies (other title, possibly "separating")
+# Splitting the FatJAR
 
-- Instead of using a FatJAR, we can split the dependencies
+- The FatJAR contains parts that change more frequent than others
 
-- We will have more than one docker `COPY` command, with our application copied last
+- The dependencies make for most of the size
+
+- Splitting the dependencies from the code will create a new layer and take advantage of caching
+
+- We will have more than one docker `COPY` instruction, with our application copied last
 
 - Changes to our application will simply require a thinner layer to be created
 
 ---
 
-# Splitting the dependencies
+# Splitting the FatJAR - V1
 
-.responsive[![Split Dependencies Layers](assets/images/Split Dependencies Layers.png)]
+.responsive[![Split Dependencies Layers](assets/images/Split Dependencies Layers - V1.png)]
+
+---
+
+# Splitting the FatJAR - V2
+
+.responsive[![Split Dependencies Layers](assets/images/Split Dependencies Layers - V2.png)]
+
+---
+
+# Splitting the FatJAR - V3
+
+.responsive[![Split Dependencies Layers](assets/images/Split Dependencies Layers - V3.png)]
+
+---
+
+# Splitting the FatJAR - V4
+
+.responsive[![Split Dependencies Layers](assets/images/Split Dependencies Layers - V4.png)]
 
 ---
 
