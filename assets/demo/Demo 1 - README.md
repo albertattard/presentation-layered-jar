@@ -10,7 +10,6 @@ Build Docker image and analyse layers with dive
 
 1. Navigate to the project directory
 
-
    ```bash
    $ cd boot-fat-jar
    ```
@@ -36,7 +35,7 @@ Build Docker image and analyse layers with dive
       FROM adoptopenjdk:8u262-b10-jre-hotspot
       ```
 
-   1. Create a directory where the application will be copied to
+   1. Creates a directory where the application will be copied to
 
       ```dockerfile
       WORKDIR /opt/app
