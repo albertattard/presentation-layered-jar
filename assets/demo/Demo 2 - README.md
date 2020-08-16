@@ -14,7 +14,7 @@ Build layered JAR, extract it and run extracted JAR
    $ cd boot-layered-jar/build/libs
    ```
 
-1. List the directory
+1. List the directory's content
 
    ```bash
    $ ls -la
