@@ -82,7 +82,7 @@ class: impact
 
 - immutable (cannot be modified once built)
 
-- new image gets created every time a new version of our application is dockerized
+- new image gets created **every time** a new version of our application is dockerized
 ---
 
 # How to create a Docker image?
@@ -247,7 +247,7 @@ they might be needed for rollbacks or legal/auditing purposes)
 
 ---
 
-# Splitting the dependencies
+# Splitting the dependencies (other title, possibly "separating")
 
 - Instead of using a FatJAR, we can split the dependencies
 
