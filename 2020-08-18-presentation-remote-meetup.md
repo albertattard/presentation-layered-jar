@@ -58,10 +58,11 @@ class: impact
 - A docker container is created every time we run a _docker image_
 
   ```bash
-  $ docker run --rm \
-     --name docker-container-demo \
-     -p 8080:8080 \
-     spkane/quantum-game:latest
+  $ docker run \
+       --rm \
+       --name docker-container-demo \
+       -p 8080:8080 \
+       spkane/quantum-game:latest
   ```
 
 - We don't have to worry about any specific runtime environment or any particular dependency version as everything is encapsulated in the container
@@ -96,13 +97,14 @@ class: impact
 
   The above command creates a Docker image and tags it as `boot-fat-jar:local`
 
-- We can run this Docker image (creating a Docker container when doing so) once this is built
+- We can run this Docker image, creating a Docker container when doing so, once this is built
 
   ```bash
-  $ docker run --rm \
-     --name boot-fat-jar-demo \
-     -p 8080:8080 \
-     boot-fat-jar:local
+  $ docker run \
+       --rm \
+       --name boot-fat-jar-demo \
+       -p 8080:8080 \
+       boot-fat-jar:local
   ```
 
 [//]: # (`--rm` [Clean up](https://docs.docker.com/engine/reference/run/#clean-up---rm)/deletes the container once the container stops))
@@ -190,7 +192,7 @@ class: impact
 - A very common way to package a Java application is to create a FatJAR (also known as _UberJAR_)
 
 - A FatJAR contains
-  - Our application
+  - The application
   - All its dependencies (JARs)
 
 - A FatJAR is standalone and can be executed using `java -jar ...`, as shown next
@@ -283,25 +285,25 @@ class: impact
 
 ---
 
-# Splitting the FatJAR - V1
+# Splitting the FatJAR - Version 1
 
 .responsive[![Split Dependencies Layers](assets/images/Split Dependencies Layers - V1.png)]
 
 ---
 
-# Splitting the FatJAR - V2
+# Splitting the FatJAR - Version 2
 
 .responsive[![Split Dependencies Layers](assets/images/Split Dependencies Layers - V2.png)]
 
 ---
 
-# Splitting the FatJAR - V3
+# Splitting the FatJAR - Version 3
 
 .responsive[![Split Dependencies Layers](assets/images/Split Dependencies Layers - V3.png)]
 
 ---
 
-# Splitting the FatJAR - V4
+# Splitting the FatJAR - Version 4
 
 .responsive[![Split Dependencies Layers](assets/images/Split Dependencies Layers - V4.png)]
 
