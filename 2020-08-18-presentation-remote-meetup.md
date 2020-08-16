@@ -330,21 +330,23 @@ Spring Boot is a very popular framework that promotes productivity
 
   ```groovy
   bootJar {
-    layered()
+      layered()
   }
   ```
 
   An equivalent plugin is available for Maven too
 
+- Spring Boot 2.4 will have _Layered JAR_ enabled by default
+
 ---
 
 # How does this work?
 
-- Gradle builds our Layered JAR
+- Build the Layered JAR (using _Gradle_)
 
-- Extract the Layered JAR
+- Extract the Layered JAR (using _layertool_)
 
-- Run the Extracted JAR
+- Run the Extracted JAR (using _JarLauncher_)
 
 .responsive[![From Code to Extracted JAR](assets/images/From Code to Extracted JAR.png)]
 
@@ -400,7 +402,7 @@ Spring Boot is a very popular framework that promotes productivity
   RUN java -Djarmode=layertools -jar application.jar extract
   ```
 
-  This command will create four folders in the builder stage, which we can copy from in the final stage
+  This command will create four folders in the builder stage, which we will copy in the final stage
 
 ---
 
@@ -422,7 +424,7 @@ Spring Boot is a very popular framework that promotes productivity
   COPY --from=builder /opt/app/application ./
   ```
 
-- Use the `JarLauncher`
+- Run the application using `JarLauncher`
 
   ```Dockerfile
   ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
@@ -449,7 +451,7 @@ Spring Boot is a very popular framework that promotes productivity
 
 # Comparison
 
-- Comparing these two approaches we will find that a layered JAR is far more efficient than a FatJAR
+- Comparing these two approaches we will find that a layered JAR is far more efficient than a FatJAR in terms of disk space
 
 .responsive[![Comparing Layer Sizes](assets/images/Comparing Layer Sizes - Boot.png)]
 
@@ -475,7 +477,7 @@ Micronaut is reflection free alternative framework to Spring Boot
 
 - This is not available for all other frameworks
 
-- We can take advantage of the docker multistage to split our dependencies from the application
+- We can still take advantage of the docker multistage to split our dependencies from the application manually
 
 ---
 
