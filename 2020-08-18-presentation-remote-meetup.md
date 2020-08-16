@@ -45,17 +45,18 @@ class: impact
 
 # What is a Docker container?
 
-- A standard deployment unit that encapsulates an application and all its dependencies
+A standard deployment unit that encapsulates an application and all its dependencies
 
 .responsive[![Docker Container](assets/images/Docker Container.png)]
 
-[//]: # (Not happy with the title, and would like to have something more like _what is docker_ instead)
+[//]: # (Not happy with the title, and would like to have something more like _what is docker_ instead => given this is
+an intermediate Docker topic, I think the audience will always connect Docker with containers. Or what was your concern here? )
 
 ---
 
 # How is a Docker container created?
 
-- A docker container is created every time we run a _docker image_
+By running a _docker image_ :
 
   ```bash
   $ docker run \
@@ -65,7 +66,7 @@ class: impact
        spkane/quantum-game:latest
   ```
 
-- We don't have to worry about any specific runtime environment or any particular dependency version as everything is encapsulated in the container
+=> We don't have to worry about any specific runtime environment or any particular dependency version as everything is encapsulated in the container
 
 ---
 
@@ -77,11 +78,11 @@ class: impact
 
 - A **read-only** filesystem that contains
 
-  - The operating system
-  - The programs needed by the application (e.g. Java Runtime Environment)
-  - The application executable, its dependencies, and configuration
+  - operating system
+  - programs needed by the application (e.g. Java Runtime Environment)
+  - application executable, its dependencies, and configuration
 
-- Immutable (cannot be modified once built)
+- **Immutable** (cannot be modified once built)
 
 - New image gets created **every time** a new version of our application is dockerized
 
@@ -89,13 +90,13 @@ class: impact
 
 # How is a Docker image created?
 
-- A Docker image is created when a _Dockerfile_ is built
+- By building a _Dockerfile_ :
 
   ```bash
   $ docker build . -t boot-fat-jar:local
   ```
 
-  The above command creates a Docker image and tags it as `boot-fat-jar:local`
+  The above command creates an image and tags it as `boot-fat-jar:local`
 
 - We can run this Docker image, creating a Docker container when doing so, once this is built
 
@@ -117,15 +118,15 @@ class: impact
 
 - A text file, usually named `Dockerfile`, that contains a set of instructions used to create the Docker image
 
-- Docker promotes reuse and a _Dockerfile_ can extend another image
+[//]: # (- Docker promotes reuse and a _Dockerfile_ can extend another image => as we will show later with multi-stage docker files?)
 
-  - For example, a _Dockerfile_ hosting a Java application can extend another image that already has the Java Runtime installed and only customises the parts that it needs, rather that starting from scratch
+[//]: # ( For example, a _Dockerfile_ hosting a Java application can extend another image that already has the Java Runtime installed and only customises the parts that it needs, rather that starting from scratch)
 
 ---
 
 # Example of a Dockerfile
 
-- Following is a typical _Dockerfile_ that hosts a Java application
+- Following is a typical _Dockerfile_ that hosts a Java 8 application:
 
   ```dockerfile
   FROM adoptopenjdk:8u262-b10-jre-hotspot
@@ -134,7 +135,7 @@ class: impact
   ENTRYPOINT ["java", "-jar", "application.jar"]
   ```
 
-- Our example makes use of Java 8, as this is still the most popular version of Java to date, but will work with newer versions of Java
+[//]: # ( - Our example makes use of Java 8, as this is still the most popular version of Java to date, but will work with newer versions of Java )
 
 ---
 
@@ -142,6 +143,7 @@ class: impact
 
 .responsive[![Docker Lifecycle](assets/images/Docker Lifecycle.png)]
 
+[//]: # ( Here you can see the whole Docker lifecycle. For today's topic we will focus on the first two stages, Dockerfiles and builds. )
 ---
 
 class: impact
