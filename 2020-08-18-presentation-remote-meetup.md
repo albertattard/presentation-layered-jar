@@ -251,7 +251,10 @@ class: impact
 
 .responsive[![FatJAR Layers](assets/images/FatJAR Layers - V1.png)]
 
-[//]: # (Should we have a quick demo here showing that the first two intermediate layers are cached but the third and the subsequent layers are not?)
+[//]: # (Should we have a quick demo here showing that the first two intermediate layers are cached but the third and the subsequent layers are not? => This is a bit tricky. It is clear that the 3rd etc layer
+ is not getting cached. However I think it is not completely clear why you are showing the same thing happening 3 times. I guess you want to
+ show how many extra layers are piling up? Maybe add a red arrow that the only important info here is the number of layers that
+  you could cache with layered jars. But let's discuss it on Wendesday.)
 
 ---
 
