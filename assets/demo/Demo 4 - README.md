@@ -281,3 +281,102 @@ Create Docker image using distribution ZIP and analyse it with dive
    ```
 
    The application will now start
+
+1. Analyse the `Dockerfile`
+
+   ```bash
+   $ cd ../../../..
+   $ vi Dockerfile
+   ```
+
+   The `Dockerfile` contains the following instructions
+
+   ```dockerfile
+   FROM alpine:3.12.0 as builder
+   WORKDIR /opt/app
+   COPY ./build/distributions/*.zip application.zip
+   RUN unzip application.zip \
+       && rm application.zip \
+       && mv * dist \
+       && rm dist/bin/*.bat \
+       && mv dist/bin/* dist/bin/run.original \
+       && sed 's|$APP_HOME/lib/application.jar|$APP_HOME/app/application.jar|g' dist/bin/run.original > dist/bin/run \
+       && chmod +x dist/bin/run \
+       && rm dist/bin/run.original \
+       && mkdir dist/app \
+       && mv dist/lib/application.jar dist/app/application.jar
+
+   FROM adoptopenjdk:8u262-b10-jre-hotspot
+   ENV APP_HOME /opt/app
+   WORKDIR ${APP_HOME}
+   COPY --from=builder /opt/app/dist/lib lib/
+   COPY --from=builder /opt/app/dist/bin bin/
+   COPY --from=builder /opt/app/dist/app app/
+   ENTRYPOINT ["./bin/run"]
+   ```
+
+   This is more involved than the others.
+
+   1. Extends from a Linux base image as all the required operations are carried out through the terminal
+
+      ```dockerfile
+      FROM alpine:3.12.0 as builder
+      ```
+
+   1. Copies the distribution archive into the Docker image work directory
+
+      ```dockerfile
+      WORKDIR /opt/app
+      COPY ./build/distributions/*.zip application.zip
+      ```
+
+   1. Extracts the archive, updates the run script and moves the application to its own directory
+
+      ```dockerfile
+      RUN unzip application.zip \
+          && rm application.zip \
+          && mv * dist \
+          && rm dist/bin/*.bat \
+          && mv dist/bin/* dist/bin/run.original \
+          && sed 's|$APP_HOME/lib/application.jar|$APP_HOME/app/application.jar|g' dist/bin/run.original > dist/bin/run \
+          && chmod +x dist/bin/run \
+          && rm dist/bin/run.original \
+          && mkdir dist/app \
+          && mv dist/lib/application.jar dist/app/application.jar
+      ```
+
+   1. Creates the Docker image that will be ued to run the application
+
+      ```dockerfile
+      FROM adoptopenjdk:8u262-b10-jre-hotspot
+      ENV APP_HOME /opt/app
+      WORKDIR ${APP_HOME}
+      COPY --from=builder /opt/app/dist/lib lib/
+      COPY --from=builder /opt/app/dist/bin bin/
+      COPY --from=builder /opt/app/dist/app app/
+      ENTRYPOINT ["./bin/run"]
+      ```
+
+      The application directory is the last directory copied as this is the layer that changes the most
+
+1. Build the project
+
+   ```bash
+   $ cd ..
+   $ ./gradlew micronaut-layered-jar:clean micronaut-layered-jar:build
+   ```
+
+1. Build the Docker image
+
+   ```bash
+   $ cd micronaut-layered-jar
+   $ docker build . -t micronaut-layered-jar:local
+   ```
+
+1. Investigate the Docker image using `dive`
+
+   ```bash
+   $ dive micronaut-layered-jar:local
+   ```
+
+   ![dive micronaut-layered-jar](../images/dive-micronaut-layered-jar.png)

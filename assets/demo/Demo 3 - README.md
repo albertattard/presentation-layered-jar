@@ -70,7 +70,7 @@ Create Docker image using layered JAR and analyse it with dive
       ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
       ```
 
-1. Build the Docker image for the first time
+1. Build the Docker image
 
    ```bash
    $ docker build . -t boot-layered-jar:local
