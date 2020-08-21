@@ -74,6 +74,12 @@ By running a _docker image_ :
 
 ---
 
+# Demo 1
+
+- Run a Docker image
+
+[▶️ Demo](assets/demo/Demo 1 - Run docker image.mp4)(Still pending!!)
+
 # What is a Docker image?
 
 - A **read-only** filesystem that contains
@@ -177,7 +183,7 @@ class: impact
 
 ---
 
-# Demo
+# Demo 2
 
 - Build a docker image
 
@@ -185,7 +191,7 @@ class: impact
 
 - Analyse the docker image, using `dive`
 
-[▶️ Demo](assets/demo/Demo 1 - Build docker image and analyse layers with dive.mp4)
+[▶️ Demo](assets/demo/Demo 2 - Build docker image and analyse layers with dive.mp4)
 
 ---
 
@@ -356,7 +362,7 @@ Spring Boot is a very popular framework that promotes productivity
 
 ---
 
-# Demo
+# Demo 3
 
 - Build layered JAR
 
@@ -364,7 +370,7 @@ Spring Boot is a very popular framework that promotes productivity
 
 - Run Extracted JAR
 
-[▶️ Demo](assets/demo/Demo 2 - Build layered JAR, extract it and run extracted JAR.mp4)
+[▶️ Demo](assets/demo/Demo 3 - Build layered JAR, extract it and run extracted JAR.mp4)
 (Still pending!!)
 
 ---
@@ -436,13 +442,13 @@ Spring Boot is a very popular framework that promotes productivity
 
 ---
 
-# Demo
+# Demo 4
 
 - Create docker image (using multistage and layered JAR)
 
 - Inspect with Dive
 
-[▶️ Demo](assets/demo/Demo 3 - Create docker image using layered JAR and analyse it with dive.mp4)
+[▶️ Demo](assets/demo/Demo 4 - Create docker image using layered JAR and analyse it with dive.mp4)
 (Still pending!!)
 
 ---
@@ -523,7 +529,7 @@ ENTRYPOINT ["./bin/run"]
 
 ---
 
-# Demo
+# Demo 5
 
 - Go through the `micronaut-layered-jar-1.0.zip` file
 
@@ -533,7 +539,7 @@ ENTRYPOINT ["./bin/run"]
 
 - Inspect with Dive
 
-[▶️ Demo](assets/demo/Demo 4 - Create docker image using distribution ZIP and analyse it with dive.mp4)
+[▶️ Demo](assets/demo/Demo 5 - Create docker image using distribution ZIP and analyse it with dive.mp4)
 (Still pending!!)
 
 ---
