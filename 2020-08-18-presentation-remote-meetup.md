@@ -80,6 +80,8 @@ By running a _docker image_ :
 
 [▶️ Demo](assets/demo/Demo 1 - Run docker image.mp4)(Still pending!!)
 
+---
+
 # What is a Docker image?
 
 - A **read-only** filesystem that contains
@@ -169,7 +171,7 @@ class: impact
   ENTRYPOINT ["java", "-jar", "application.jar"]
   ```
 
-- The above docker file has four layers
+- The above Dockerfile has four layers:
   - `FROM ...`
   - `WORKDIR ...`
   - `COPY ...`
@@ -201,9 +203,9 @@ class: impact
 
 - A FatJAR contains
   - The application
-  - All its dependencies (JARs)
+  - All its dependencies
 
-- A FatJAR is standalone and can be executed using `java -jar ...`, as shown next
+- A FatJAR is standalone and can be executed like this:
 
   ```bash
   $ java -jar application.jar
@@ -211,9 +213,9 @@ class: impact
 
 ---
 
-# FatJAR and Docker image
+# FatJAR in a Docker image
 
-- The FatJAR is copied from our laptop into the Docker image using the `COPY` instruction, as shown next
+- The FatJAR is copied from our laptop into the Docker image using the `COPY` instruction:
 
   ```dockerfile
   COPY ./build/libs/*.jar application.jar
@@ -233,9 +235,9 @@ class: impact
 
 # Space requirements
 
-- Consider a relatively active team working 5 days a week and committing 20 times per day
+- Consider a team working 5 days a week and committing 20 times per day
 
-- Each commit is followed by a push, which triggers an automated build pipeline, which builds the application and creates a new docker image
+- Each commit is followed by a push, which triggers an automated build pipeline, which builds the application and **creates a new docker image**
 
 .responsive[![Size required after a week FatJAR.png](assets/images/Size required after a week FatJAR.png)]
 
@@ -245,11 +247,11 @@ class: impact
 
 # The challenge
 
-- Our application comprises our code and its dependencies
+- Our application (fatJAR) contains our code **and** its dependencies
 
 - When new features are added, the dependencies are not necessarily updated
 
-- One small change in the code, creates a new docker layer of about 16MB in size
+- **However: each small change in the code, creates a new docker layer of about 16MB in size**
 
 ---
 
@@ -281,21 +283,23 @@ class: impact
 
 # Splitting the FatJAR
 
-- The FatJAR contains parts that change more frequent than others
+- Some parts of the FatJAR changes less frequently but take up a lot of space
 
 - The dependencies make for most of the size
 
-- Splitting the dependencies from the code will create a new layer and take advantage of caching
+- **Solution: Splitting the dependencies from the code by creating a new layer and taking advantage of caching**
 
-- We will have more than one docker `COPY` instruction, with our application copied last
+[//]: # (We will have more than one docker `COPY` instruction, with our application copied last)
 
-- Changes to our application will simply require a thinner layer to be created
+[//]: # (- Changes to our application will simply require a thinner layer to be created)
 
 ---
 
 # Splitting the FatJAR - Version 1
 
 .responsive[![Split Dependencies Layers](assets/images/Split Dependencies Layers - V1.png)]
+
+[//]: # (typo: the layer contains our code without the dependencies, instead of "together without the dependencies")
 
 ---
 
