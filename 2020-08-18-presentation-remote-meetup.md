@@ -37,6 +37,14 @@ class: impact
 
 ---
 
+# Managing expectations
+
+This is not a Docker tutorial and the goal of the presentation is to show how to build effective Docker images.
+
+Any programmer that heard about docker can follow.
+
+---
+
 class: impact
 
 # Docker
@@ -45,12 +53,12 @@ class: impact
 
 # What is a Docker container?
 
-A standard deployment unit that encapsulates an application and all its dependencies
+A standard deployment unit that encapsulates an application and all of its dependencies
 
 .responsive[![Docker Container](assets/images/Docker Container.png)]
 
-[//]: # (Not happy with the title, and would like to have something more like _what is docker_ instead => given this is
-an intermediate Docker topic, I think the audience will always connect Docker with containers. Or what was your concern here? )
+[//]: # (JL - Not happy with the title, and would like to have something more like _what is docker_ instead => given this is an intermediate Docker topic, I think the audience will always connect Docker with containers. Or what was your concern here? )
+[//]: # (AA - We can change the title to _Containers_.  No need to be a question here.  If we ask anyone to give us a synonym for docker, that would be containers.  I've added a new slide _Managing expectations_.)
 
 ---
 
