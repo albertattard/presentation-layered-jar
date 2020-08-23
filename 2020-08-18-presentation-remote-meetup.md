@@ -64,7 +64,7 @@ A standard deployment unit that encapsulates an application and all of its depen
 
 # How is a Docker container created?
 
-By running a _docker image_ :
+By running a _docker image_
 
   ```bash
   $ docker run \
@@ -75,6 +75,13 @@ By running a _docker image_ :
   ```
 
 => We don't have to worry about any specific runtime environment or any particular dependency version as everything is encapsulated in the container
+
+[//]: # (AA - What's with the `=>`?)
+
+[//]: # (AA - Notes)
+[//]: # (AA - `--rm` [Clean up](https://docs.docker.com/engine/reference/run/#clean-up---rm)/deletes the container once the container stops))
+[//]: # (AA - `--name` [Name](https://docs.docker.com/engine/reference/run/#name---name) the container)
+[//]: # (AA - `-p` binds a port on the host to a port on the container)
 
 ---
 
