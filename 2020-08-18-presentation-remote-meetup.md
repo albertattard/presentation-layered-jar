@@ -66,13 +66,13 @@ A standard deployment unit that encapsulates an application and all of its depen
 
 By running a _docker image_
 
-  ```bash
-  $ docker run \
-       --rm \
-       --name docker-container-demo \
-       -p 8080:8080 \
-       spkane/quantum-game:latest
-  ```
+```bash
+$ docker run \
+    --rm \
+    --name docker-container-demo \
+    -p 8080:8080 \
+    spkane/quantum-game:latest
+```
 
 => We don't have to worry about any specific runtime environment or any particular dependency version as everything is encapsulated in the container
 
@@ -91,9 +91,10 @@ By running a _docker image_
 
 # Demo 1
 
-- Run a Docker image
+Create Docker container
 
-[▶️ Demo](assets/demo/Demo 1 - Run docker image.mp4)(Still pending!!)
+- Find a Docker image
+- Create a Docker container (_run Docker image_)
 
 ---
 
@@ -108,6 +109,15 @@ By running a _docker image_
 - **Immutable** (cannot be modified once built)
 
 - New image gets created **every time** a new version of our application is dockerized
+
+---
+
+# Demo 2
+
+Analyse Docker image
+
+- Overview of `dive`
+- Analyse Docker with `dive`
 
 ---
 
@@ -200,15 +210,13 @@ class: impact
 
 ---
 
-# Demo 2
+# Demo 3
+
+Build docker image and analyse layers with dive
 
 - Build a docker image
-
 - Discuss layers and see docker takes advantage of caching
-
 - Analyse the docker image, using `dive`
-
-[▶️ Demo](assets/demo/Demo 2 - Build docker image and analyse layers with dive.mp4)
 
 ---
 
@@ -381,16 +389,13 @@ Spring Boot is a very popular framework that promotes productivity
 
 ---
 
-# Demo 3
+# Demo 4
+
+Build layered JAR, extract it and run extracted JAR
 
 - Build layered JAR
-
 - Extract Layered JAR
-
 - Run Extracted JAR
-
-[▶️ Demo](assets/demo/Demo 3 - Build layered JAR, extract it and run extracted JAR.mp4)
-(Still pending!!)
 
 ---
 
@@ -461,14 +466,12 @@ Spring Boot is a very popular framework that promotes productivity
 
 ---
 
-# Demo 4
+# Demo 5
+
+Create docker image using layered JAR and analyse it with dive
 
 - Create docker image (using multistage and layered JAR)
-
 - Inspect with Dive
-
-[▶️ Demo](assets/demo/Demo 4 - Create docker image using layered JAR and analyse it with dive.mp4)
-(Still pending!!)
 
 ---
 
@@ -548,18 +551,14 @@ ENTRYPOINT ["./bin/run"]
 
 ---
 
-# Demo 5
+# Demo 6
+
+Create docker image using distribution ZIP and analyse it with dive
 
 - Go through the `micronaut-layered-jar-1.0.zip` file
-
 - Go through the multistage docker file
-
 - Create docker image (using multistage)
-
 - Inspect with Dive
-
-[▶️ Demo](assets/demo/Demo 5 - Create docker image using distribution ZIP and analyse it with dive.mp4)
-(Still pending!!)
 
 ---
 
@@ -572,6 +571,7 @@ ENTRYPOINT ["./bin/run"]
 class: impact
 
 # Thank You
+
 ## Feedback makes us better
 
 Please send any feedback to: albert.attard@thoughtworks.com or jlang@thoughtworks.com
