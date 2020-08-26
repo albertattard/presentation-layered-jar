@@ -23,8 +23,21 @@ Analyse a Docker image
    $ brew install dive
    ```
 
-1. b
+1. Investigate with dive
 
    ```bash
    $ dive spkane/quantum-game:latest
    ```
+
+   Dive will download the image
+
+   ```bash
+   Image Source: docker://spkane/quantum-game:latest
+   Fetching image... (this can take a while for large images)
+   Analyzing image...
+   Building cache...
+   ```
+
+   ![Dive - Layer 1](../images/Dive - Layer 1.png)
+
+   ![Dive - Layer 2](../images/Dive - Layer 2.png)
