@@ -328,8 +328,6 @@ Build docker image and analyse layers with dive
 
 .responsive[![Split Dependencies Layers](assets/images/Split Dependencies Layers - V1.png)]
 
-[//]: # (typo: the layer contains our code without the dependencies, instead of "together without the dependencies")
-
 ---
 
 # Splitting the FatJAR - Version 2
