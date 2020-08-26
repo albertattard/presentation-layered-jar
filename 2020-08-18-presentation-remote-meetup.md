@@ -61,24 +61,22 @@ A standard deployment unit that encapsulates an application and all of its depen
 
 # How is a Docker container created?
 
-By running a _docker image_
+- By running a _docker image_
 
-```bash
-$ docker run \
-    --rm \
-    --name docker-container-demo \
-    -p 8080:8080 \
-    spkane/quantum-game:latest
-```
+  ```bash
+  $ docker run \
+      --rm \
+      --name docker-container-demo \
+      -p 8080:8080 \
+      spkane/quantum-game:latest
+  ```
 
-=> We don't have to worry about any specific runtime environment or any particular dependency version as everything is encapsulated in the container
+  .conclusion[=> We don't have to worry about any specific runtime environment or any particular dependency version as everything is encapsulated in the container]
 
-[//]: # (AA - What's with the `=>`?)
-
-[//]: # (AA - Notes)
-[//]: # (AA - `--rm` [Clean up](https://docs.docker.com/engine/reference/run/#clean-up---rm)/deletes the container once the container stops))
-[//]: # (AA - `--name` [Name](https://docs.docker.com/engine/reference/run/#name---name) the container)
-[//]: # (AA - `-p` binds a port on the host to a port on the container)
+[//]: # (Notes)
+[//]: # (`--rm` [Clean up](https://docs.docker.com/engine/reference/run/#clean-up---rm)/deletes the container once the container stops))
+[//]: # (`--name` [Name](https://docs.docker.com/engine/reference/run/#name---name) the container)
+[//]: # (`-p` binds a port on the host to a port on the container)
 
 ---
 
@@ -138,6 +136,7 @@ Analyse Docker image
        boot-fat-jar:local
   ```
 
+[//]: # (Notes)
 [//]: # (`--rm` [Clean up](https://docs.docker.com/engine/reference/run/#clean-up---rm)/deletes the container once the container stops))
 [//]: # (`--name` [Name](https://docs.docker.com/engine/reference/run/#name---name) the container)
 [//]: # (`-p` binds a port on the host to a port on the container)
@@ -148,9 +147,9 @@ Analyse Docker image
 
 - A text file, usually named `Dockerfile`, that contains a set of instructions used to create the Docker image
 
-[//]: # (- Docker promotes reuse and a _Dockerfile_ can extend another image => as we will show later with multi-stage docker files?)
-
-[//]: # ( For example, a _Dockerfile_ hosting a Java application can extend another image that already has the Java Runtime installed and only customises the parts that it needs, rather that starting from scratch)
+[//]: # (Notes)
+[//]: # (Docker promotes reuse and a _Dockerfile_ can extend another image => as we will show later with multi-stage docker files?)
+[//]: # (For example, a _Dockerfile_ hosting a Java application can extend another image that already has the Java Runtime installed and only customises the parts that it needs, rather that starting from scratch)
 
 ---
 
@@ -165,7 +164,8 @@ Analyse Docker image
   ENTRYPOINT ["java", "-jar", "application.jar"]
   ```
 
-[//]: # ( - Our example makes use of Java 8, as this is still the most popular version of Java to date, but will work with newer versions of Java )
+[//]: # (Notes)
+[//]: # (Our example makes use of Java 8, as this is still the most popular version of Java to date, but will work with newer versions of Java)
 
 ---
 
@@ -173,7 +173,9 @@ Analyse Docker image
 
 .responsive[![Docker Lifecycle](assets/images/Docker Lifecycle.png)]
 
-[//]: # ( Here you can see the whole Docker lifecycle. For today's topic we will focus on the first two stages, Dockerfiles and builds. )
+[//]: # (Notes)
+[//]: # (Here you can see the whole Docker lifecycle. For today's topic we will focus on the first two stages, Dockerfiles and builds.)
+
 ---
 
 class: impact
@@ -267,11 +269,11 @@ Build docker image and analyse layers with dive
 
 # The challenge
 
-- Our application (fatJAR) contains our code **and** its dependencies
+- Our application (FatJAR) contains our code **and** its dependencies
 
 - When new features are added, the dependencies are not necessarily updated
 
-- **However: each small change in the code, creates a new docker layer of about 16MB in size**
+  .conclusion[However: each small change in the code, creates a new docker layer of about 16MB in size]
 
 ---
 
@@ -279,13 +281,14 @@ Build docker image and analyse layers with dive
 
 .responsive[![FatJAR Layers](assets/images/FatJAR Layers - V1.png)]
 
-[//]: # (Should we have a quick demo here showing that the first two intermediate layers are cached but the third and the subsequent layers are not?  Should we have a quick demo here showing that the first two intermediate layers are cached but the third and the subsequent layers are not? => This is a bit tricky. It is clear that the 3rd etc layer is not getting cached. However I think it is not completely clear why you are showing the same thing happening 3 times. I guess you want to show how many extra layers are piling up? Maybe add a red arrow that the only important info here is the number of layers that you could cache with layered jars. But let's discuss it on Wendesday.)
-
 ---
 
 # The challenge - Version 2
 
 .responsive[![FatJAR Layers](assets/images/FatJAR Layers - V2.png)]
+
+[//]: # (Notes)
+[//]: # (Docker uses caching as shown in demo 3)
 
 ---
 
@@ -293,11 +296,17 @@ Build docker image and analyse layers with dive
 
 .responsive[![FatJAR Layers](assets/images/FatJAR Layers - V3.png)]
 
+[//]: # (Notes)
+[//]: # (Docker uses caching as shown in demo 3)
+
 ---
 
 # The challenge - Version 4
 
 .responsive[![FatJAR Layers](assets/images/FatJAR Layers - V4.png)]
+
+[//]: # (Notes)
+[//]: # (Docker uses caching as shown in demo 3)
 
 ---
 
@@ -307,11 +316,11 @@ Build docker image and analyse layers with dive
 
 - The dependencies make for most of the size
 
-- **Solution: Splitting the dependencies from the code by creating a new layer and taking advantage of caching**
+  .conclusion[Solution: Splitting the dependencies from the code by creating a new layer and taking advantage of caching]
 
+[//]: # (Notes)
 [//]: # (We will have more than one docker `COPY` instruction, with our application copied last)
-
-[//]: # (- Changes to our application will simply require a thinner layer to be created)
+[//]: # (Changes to our application will simply require a thinner layer to be created)
 
 ---
 
