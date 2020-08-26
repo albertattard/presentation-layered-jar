@@ -57,9 +57,6 @@ A standard deployment unit that encapsulates an application and all of its depen
 
 .responsive[![Docker Container](assets/images/Docker Container.png)]
 
-[//]: # (JL - Not happy with the title, and would like to have something more like _what is docker_ instead => given this is an intermediate Docker topic, I think the audience will always connect Docker with containers. Or what was your concern here? )
-[//]: # (AA - We can change the title to _Containers_.  No need to be a question here.  If we ask anyone to give us a synonym for docker, that would be containers.  I've added a new slide _Managing expectations_.)
-
 ---
 
 # How is a Docker container created?
