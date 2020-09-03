@@ -39,9 +39,9 @@ class: impact
 
 # Managing expectations
 
-This is not a Docker tutorial and the goal of the presentation is to show how to build effective Docker images.
+The goal of this presentation is to show how to build effective Docker images for JVM based applications.
 
-Any programmer that heard about docker can follow.
+Any developer who has heard about Docker before should be able to follow.
 
 ---
 
