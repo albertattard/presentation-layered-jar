@@ -1,9 +1,1 @@
-.gradle
-.idea
-.tmp
-**/build
-**/out
-node_modules
 **/.DS_Store
-dive.log
-package-lock.json

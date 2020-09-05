@@ -13,6 +13,8 @@ These examples can work with newer versions of Java too.
 
 ## Examples
 
+There are four examples in total, two with Spring boot and two with Micronaut
+
 1. [Spring Boot Fat JAR](#spring-boot-fat-jar)
 1. [Spring Boot Layered JAR](#spring-boot-layered-jar)
 1. [Micronaut Fat JAR](#micronaut-fat-jar)
@@ -385,7 +387,5 @@ Useful docker commands
 1. Login to a running Docker container
 
    ```bash
-   $ docker exec \
-       -it <container-name> \
-       /bin/bash
+   $ docker exec -it <container-name> /bin/bash
    ```
