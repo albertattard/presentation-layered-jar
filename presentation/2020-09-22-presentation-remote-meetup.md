@@ -91,6 +91,8 @@ Create Docker container
 - Find a Docker image
 - Create a Docker container (_run Docker image_)
 
+[//]: # (We were able to start the Quantum Game application without having to worry about anything.  This Quantum Game application could have been written in Java, Node, or assembly for all we care.  All we need is to have the Docker image and the rest is handled by Docker.)
+
 ---
 
 # What is a Docker image?

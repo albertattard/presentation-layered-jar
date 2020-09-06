@@ -65,3 +65,5 @@ Run a Docker image
    ![Quantum Game with Photons](../assets/images/Quantum%20Game%20with%20Photons.png)
 
    Have fun!!
+
+We were able to start the Quantum Game application without having to worry about anything.  This Quantum Game application could have been written in Java, Node, or assembly for all we care.  All we need is to have the Docker image and the rest is handled by Docker.
