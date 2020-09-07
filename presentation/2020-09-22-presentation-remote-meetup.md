@@ -221,9 +221,9 @@ Build docker image and analyse layers with dive
 
 ---
 
-# FatJAR / UberJAR
+# FatJAR 
 
-- A very common way to package a Java application is to create a FatJAR (also known as _UberJAR_)
+- A very common way to package a Java application is to create a FatJAR 
 
 - A FatJAR contains
   - The application
