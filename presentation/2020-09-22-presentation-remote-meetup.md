@@ -71,7 +71,7 @@ A standard deployment unit that encapsulates an application and all of its depen
       spkane/quantum-game:latest
   ```
 
-  .conclusion[=> We don't have to worry about any specific runtime environment or any particular dependency version as everything is encapsulated in the container]
+  .conclusion[➤ We don't have to worry about any specific runtime environment or any particular dependency version as everything is encapsulated in the container]
 
 [//]: # (Notes)
 [//]: # (`--rm` [Clean up](https://docs.docker.com/engine/reference/run/#clean-up---rm)/deletes the container once the container stops))
