@@ -19,6 +19,7 @@ There are four examples in total, two with Spring boot and two with Micronaut
 1. [Spring Boot Layered JAR](#spring-boot-layered-jar)
 1. [Micronaut Fat JAR](#micronaut-fat-jar)
 1. [Micronaut Layered JAR](#micronaut-layered-jar)
+1. [Clojure Fat JAR](#clojure-fat-jar)
 
 ### Spring Boot Fat JAR
 
@@ -63,7 +64,7 @@ There are four examples in total, two with Spring boot and two with Micronaut
 1. Run docker images
 
    ```bash
-   $ docker run -it -p 8080:8080 boot-fat-jar:local
+   $ docker run -it -p 8080:8080 --name boot-fat-jar boot-fat-jar:local
    ```
 
    Access the application
@@ -143,7 +144,7 @@ There are four examples in total, two with Spring boot and two with Micronaut
 1. Run docker images
 
    ```bash
-   $ docker run -it -p 8080:8080 boot-layered-jar:local
+   $ docker run -it -p 8080:8080 --name boot-layered-jar boot-layered-jar:local
    ```
 
    Access the application
@@ -203,7 +204,7 @@ There are four examples in total, two with Spring boot and two with Micronaut
 1. Run docker images
 
    ```bash
-   $ docker run -it -p 8080:8080 micronaut-fat-jar:local
+   $ docker run -it -p 8080:8080 --name micronaut-fat-jar micronaut-fat-jar:local
    ```
 
    Access the application
@@ -330,7 +331,7 @@ There are four examples in total, two with Spring boot and two with Micronaut
 1. Run docker images
 
    ```bash
-   $ docker run -it -p 8080:8080 micronaut-layered-jar:local
+   $ docker run -it -p 8080:8080 --name micronaut-layered-jar micronaut-layered-jar:local
    ```
 
    Access the application
@@ -344,6 +345,15 @@ There are four examples in total, two with Spring boot and two with Micronaut
    ```json
    {"message":"Layered JARS are great!!"}
    ```
+
+### Clojure Fat JAR
+
+```bash
+$ clj -e "(compile 'layeredjar)"
+$ clj -A:fatjar --main-class layeredjar
+$ docker build . -t clojure-fat-jar:local
+$ docker run -it --rm -p 8080:8080 --name clojure-fat-jar clojure-fat-jar:local
+```
 
 ## Other technologies
 
