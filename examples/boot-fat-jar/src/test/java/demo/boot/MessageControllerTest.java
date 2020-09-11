@@ -11,22 +11,22 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@DisplayName( "Message controller" )
-@WebMvcTest( MessageController.class )
+@DisplayName("Message controller")
+@WebMvcTest(MessageController.class)
 public class MessageControllerTest {
 
   @Autowired
   private MockMvc mockMvc;
 
   @Test
-  @DisplayName( "should return the message" )
+  @DisplayName("should return the message")
   public void shouldReturnTheOffices() throws Exception {
-    final Message expected = new Message( "Layered JARS are great!!" );
+    final Message expected = new Message("Layered JARS are great!!");
 
-    mockMvc.perform( get( "/" ) )
-      .andExpect( status().isOk() )
-      .andExpect( jsonPath( "$" ).isMap() )
-      .andExpect( jsonPath( "$.message", is( expected.getMessage() ) ) )
+    mockMvc.perform(get("/"))
+      .andExpect(status().isOk())
+      .andExpect(jsonPath("$").isMap())
+      .andExpect(jsonPath("$.message", is(expected.getMessage())))
     ;
   }
 }

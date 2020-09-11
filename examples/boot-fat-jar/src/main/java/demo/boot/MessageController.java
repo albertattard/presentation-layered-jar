@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MessageController {
 
-  @GetMapping( "/" )
+  @GetMapping("/")
   public Message message() {
-    return new Message( "Layered JARS are great!!" );
+    return new Message("Layered JARS are great!!");
   }
 
 }

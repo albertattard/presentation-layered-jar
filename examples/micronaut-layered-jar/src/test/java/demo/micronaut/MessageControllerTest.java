@@ -12,20 +12,20 @@ import javax.inject.Inject;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @MicronautTest
-@DisplayName( "Message controller" )
+@DisplayName("Message controller")
 public class MessageControllerTest {
 
   @Inject
-  @Client( "/" )
+  @Client("/")
   private RxHttpClient client;
 
   @Test
-  @DisplayName( "should return the message" )
+  @DisplayName("should return the message")
   public void shouldReturnTheOffices() {
-    final Message expected = new Message( "Layered JARS are great!!" );
+    final Message expected = new Message("Layered JARS are great!!");
 
-    final HttpRequest<String> request = HttpRequest.GET( "/" );
-    final Message actual = client.toBlocking().retrieve( request, Message.class );
-    assertEquals( expected, actual );
+    final HttpRequest<String> request = HttpRequest.GET("/");
+    final Message actual = client.toBlocking().retrieve(request, Message.class);
+    assertEquals(expected, actual);
   }
 }

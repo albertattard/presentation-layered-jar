@@ -8,7 +8,7 @@ public class MessageController {
 
   @Get
   public Message message() {
-    return new Message( "Layered JARS are great!!" );
+    return new Message("Layered JARS are great!!");
   }
 
 }
