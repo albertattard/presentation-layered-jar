@@ -61,7 +61,7 @@ A standard deployment unit that encapsulates an application and all of its depen
 
 # How is a Docker container created?
 
-- By running a _docker image_
+- By running a _Docker image_
 
   ```bash
   $ docker run \
@@ -105,16 +105,15 @@ Create Docker container
 
 - **Immutable** (cannot be modified once built)
 
-- New image gets created **every time** a new version of our application is dockerized
+.conclusion[➤ New image gets created **every time** a new version of our application is dockerized]
 
 ---
 
 # Demo 2
 
-Analyse Docker image
+Overview of `dive` (OS tool for exploring a docker image)
 
-- Overview of `dive`
-- Analyse Docker with `dive`
+[//]: # (shows Docker image contents broken down by layer, we will show you later how to make use of it)
 
 ---
 
@@ -147,7 +146,7 @@ Analyse Docker image
 
 # What is a Dockerfile?
 
-- A text file, usually named `Dockerfile`, that contains a set of instructions used to create the Docker image
+A text file, usually named `Dockerfile`, that contains a set of instructions used to create the Docker image
 
 [//]: # (Notes)
 [//]: # (Docker promotes reuse and a _Dockerfile_ can extend another image => as we will show later with multi-stage docker files?)
@@ -157,7 +156,7 @@ Analyse Docker image
 
 # Example of a Dockerfile
 
-- Following is a typical _Dockerfile_ that hosts a Java 8 application:
+Following is a typical _Dockerfile_ that hosts a Java 8 application:
 
   ```dockerfile
   FROM adoptopenjdk:8u262-b10-jre-hotspot
@@ -167,7 +166,11 @@ Analyse Docker image
   ```
 
 [//]: # (Notes)
-[//]: # (Our example makes use of Java 8, as this is still the most popular version of Java to date, but will work with newer versions of Java)
+[//]: # (Docker runs instructions in a Dockerfile in order.)
+[//]: # (FROM: A Dockerfile must begin with a FROM instruction, whichspecifies the Parent Image from which you are building.)
+[//]: # (WORKDIR: sets the working directory for the following command.)
+[//]: # (COPY: copies the application jar file from the source and adds it to the filesystem of the container at the defined path.)
+[//]: # (ENTRYPOINT: runs the Java application)
 
 ---
 
@@ -176,7 +179,9 @@ Analyse Docker image
 .responsive[![Docker Lifecycle](assets/images/Docker Lifecycle.png)]
 
 [//]: # (Notes)
-[//]: # (Here you can see the whole Docker lifecycle. For today's topic we will focus on the first two stages, Dockerfiles and builds.)
+[//]: # (Here you can see the whole Docker lifecycle that we just walked through starting from the end.)
+[//]: # (The instructions inside the Dockerfile build the Docker image which gets executed as a Docker container.)
+[//]: # (For today's topic we will focus on the first two stages, Dockerfiles and images.)
 
 ---
 
