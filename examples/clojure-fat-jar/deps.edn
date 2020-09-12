@@ -3,8 +3,7 @@
            io.pedestal/pedestal.route   {:mvn/version "0.5.8"}
            io.pedestal/pedestal.jetty   {:mvn/version "0.5.8"}
            org.clojure/clojure          {:mvn/version "1.10.1"}
-           org.slf4j/slf4j-simple       {:mvn/version "1.7.30"}
-           }
+           org.slf4j/slf4j-simple       {:mvn/version "1.7.30"}}
  :paths   ["src" "classes"]
  :aliases {:fatjar {:extra-deps {uberdeps {:mvn/version "1.0.1"}}
                     :main-opts  ["-m" "uberdeps.uberjar" "--target" "build/libs/clojure-fat-jar-1.0.jar"]}}}
