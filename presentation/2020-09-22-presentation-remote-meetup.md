@@ -189,6 +189,8 @@ class: impact
 
 # Layers
 
+[//]: # (This brings us to the topic of layers.)
+
 ---
 
 # What are layers?
@@ -208,11 +210,17 @@ class: impact
   - `COPY ...`
   - `ENTRYPOINT ...`
 
+[//]: # (You already know this Dockerfile from a previous example.)
+[//]: # (It has 4 layers, each starting with an instruction.)
+
 ---
 
 # Intermediate Images
 
 .responsive[![Docker Layers](assets/images/Docker%20Layers.png)]
+
+[//]: # (Each executed instruction creates an intermediate layer or an intermediate image => same thing?)
+[//]: # (every instruction afterwards builds on the previous layer)
 
 ---
 
@@ -253,6 +261,8 @@ Build docker image and analyse layers with dive
 - This creates a new layer every time a new FatJAR file is created
 
 - Creating many large layers may consume large amounts of disk space
+
+[//]: # (As you can see in the next image)
 
 ---
 
@@ -296,6 +306,7 @@ Build docker image and analyse layers with dive
 
 [//]: # (Notes)
 [//]: # (Docker uses caching as shown in demo 3)
+[//]: # (That still means that every time a dev pushes code, two new layers are built, one of them containing the whole fatjar)
 
 ---
 
@@ -319,21 +330,21 @@ Build docker image and analyse layers with dive
 
 # Splitting the FatJAR
 
-- Some parts of the FatJAR changes less frequently but take up a lot of space
+- Some parts of the FatJAR, the dependencies, change less frequently but take up a lot of space
 
-- The dependencies make for most of the size
+  .conclusion[➤ Solution: Splitting the dependencies from the code by creating a new layer and taking advantage of caching]
 
-  .conclusion[Solution: Splitting the dependencies from the code by creating a new layer and taking advantage of caching]
 
-[//]: # (Notes)
-[//]: # (We will have more than one docker `COPY` instruction, with our application copied last)
-[//]: # (Changes to our application will simply require a thinner layer to be created)
 
 ---
 
 # Splitting the FatJAR - Version 1
 
 .responsive[![Split Dependencies Layers](assets/images/Split Dependencies Layers - V1.png)]
+
+[//]: # (Notes)
+[//]: # (We will have more than one docker `COPY` instruction, with our application copied last)
+[//]: # (Changes to our application will simply require a thinner layer to be created)
 
 ---
 
