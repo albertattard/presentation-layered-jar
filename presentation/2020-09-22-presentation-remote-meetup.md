@@ -88,13 +88,15 @@ A standard deployment unit that encapsulates an application and all of its depen
 
 .conclusion[➤ New image gets created **every time** a new version of our application is dockerized]
 
+[//]: # (This is a good time to introduce dive, a tool for inspecting a docker image)
+
+
 ---
 
 # Demo 2
 
 Overview of `dive` (OS tool for exploring a docker image)
 
-[//]: # (This is a good time to introduce dive, a tool for inspecting a docker image)
 [//]: # (shows Docker image contents broken down by layer, we will show you later how to make use of it)
 
 ---
@@ -128,15 +130,12 @@ Overview of `dive` (OS tool for exploring a docker image)
 
 # What is a Dockerfile?
 
-A text file, usually named `Dockerfile`, that contains a set of instructions used to create the Docker image
+A text file, usually named `Dockerfile`, that contains a set of instructions (used to create the Docker image)
 
-[//]: # (Notes)
-[//]: # (Docker promotes reuse and a _Dockerfile_ can extend another image => as we will show later with multi-stage docker files?)
-[//]: # (For example, a _Dockerfile_ hosting a Java application can extend another image that already has the Java Runtime installed and only customises the parts that it needs, rather that starting from scratch)
 
 ---
 
-# Example of a Dockerfile
+# What does a Dockerfile look like?
 
 Following is a typical _Dockerfile_ that hosts a Java 8 application:
 
@@ -149,7 +148,7 @@ Following is a typical _Dockerfile_ that hosts a Java 8 application:
 
 [//]: # (Notes)
 [//]: # (Docker runs instructions in a Dockerfile in order.)
-[//]: # (FROM: A Dockerfile must begin with a FROM instruction, whichspecifies the Parent Image from which you are building.)
+[//]: # (FROM: A Dockerfile must begin with a FROM instruction, which specifies the Parent Image from which you are building.)
 [//]: # (WORKDIR: sets the working directory for the following command.)
 [//]: # (COPY: copies the application jar file from the source and adds it to the filesystem of the container)
 [//]: # (ENTRYPOINT: runs the Java application)
@@ -203,7 +202,7 @@ class: impact
 
 [//]: # (Each executed instruction creates an intermediate layer or an intermediate image => same thing?)
 [//]: # (every instruction afterwards builds on the previous layer)
-[//]: # (Switch to Albert for Demo on hot wo build a Docker image)
+[//]: # (Switch to Albert for a Demo on how we build a Docker image and analyse its layers using dive)
 
 ---
 
@@ -220,10 +219,12 @@ Build docker image and analyse layers with dive
 
 # JAR file
 
- .jar (= java archive) is a package file format
-
 [//]: # (Notes)
 [//]: # (In the Demo you just saw a copy instruction involving a .jar file. JAR stands for Java archive and is a package file format. )
+
+ .jar (= java archive) is a package file format
+
+
 
 ---
 
@@ -342,7 +343,7 @@ Build docker image and analyse layers with dive
 
 [//]: # (Notes)
 [//]: # (How will this work in detail?)
-[//]: # (We will have one extra `COPY` instruction or layer, with our application getting copied after the dependencies)
+[//]: # (Dependencies and code now in two seperate layers)
 
 
 ---
