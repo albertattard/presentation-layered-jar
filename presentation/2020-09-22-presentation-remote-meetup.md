@@ -191,7 +191,7 @@ class: impact
   - `COPY ...`
   - `ENTRYPOINT ...`
 
-[//]: # (It has 4 layers, each starting with an instruction.)
+[//]: # (It has 4 layers, each starting with an instruction. Basically every line is a layer.)
 
 ---
 
@@ -236,7 +236,7 @@ class: impact
   - The application
   - All its dependencies
 
-- A FatJAR is standalone and can be executed like this:
+- it is standalone and can be executed like this:
 
   ```bash
   $ java -jar application.jar
