@@ -176,7 +176,7 @@ class: impact
 
 # What are layers?
 
-- Consider the following _Dockerfile_
+- Remember our _Dockerfile_:
 
   ```dockerfile
   FROM adoptopenjdk:8u262-b10-jre-hotspot
@@ -191,7 +191,6 @@ class: impact
   - `COPY ...`
   - `ENTRYPOINT ...`
 
-[//]: # (You already know this Dockerfile from a previous example.)
 [//]: # (It has 4 layers, each starting with an instruction.)
 
 ---
@@ -200,20 +199,21 @@ class: impact
 
 .responsive[![Docker Layers](assets/images/Docker%20Layers.png)]
 
-[//]: # (Each executed instruction creates an intermediate layer or an intermediate image => same thing?)
+[//]: # (Each executed instruction creates a layer which is also an intermediate image)
 [//]: # (every instruction afterwards builds on the previous layer)
 [//]: # (Switch to Albert for a Demo on how we build a Docker image and analyse its layers using dive)
 
 ---
 
-# Demo 3
+# Demo 
 
-Build docker image and analyse layers with dive
+**Build docker image and analyse layers with _dive_**
 
 - Build a docker image
 - Discuss layers and see docker takes advantage of caching
 - Analyse the docker image, using `dive`
 
+[//]: # (Demo 3)
 
 ---
 
@@ -269,14 +269,14 @@ Build docker image and analyse layers with dive
 
 # Space requirements
 
-- Consider a team working 5 days a week and committing 20 times per day
+- Consider a team working 5 days a week and committing code 20 times per day
 
 - Each commit is followed by a push, which triggers an automated build pipeline, which builds the application and **creates a new docker image**
 
 .responsive[![Size required after a week FatJAR.png](assets/images/Size required after a week FatJAR.png)]
 
 [//]: # (Notes)
-[//]: # (Deleting older images is not a trivial task and requires some thought because they might be needed for rollbacks or legal/auditing purposes)
+[//]: # (Deleting older images is not a trivial task because they might be needed for rollbacks or auditing purposes)
 
 ---
 
@@ -296,6 +296,8 @@ Build docker image and analyse layers with dive
 
 [//]: # (Notes)
 [//]: # (What does this mean in detail? We will visiluaze what happens every time the code changes.)
+[//]: # (Here you can see the layer where the code change is happenening)
+
 
 ---
 
@@ -369,7 +371,7 @@ Build docker image and analyse layers with dive
 
 .responsive[![Split Dependencies Layers](assets/images/Split Dependencies Layers - V4.png)]
 
-[//]: # (So changes to our application will require a much thinner layer to be created)
+[//]: # (So from now on changes to our application will require a much thinner layer to be created)
 
 ---
 
