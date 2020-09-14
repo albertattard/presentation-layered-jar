@@ -35,13 +35,6 @@ class: impact
 ## Spring Boot
 ## Beyond Spring Boot
 
----
-
-# Managing expectations
-
-The goal of this presentation is to show how to build effective Docker images for JVM based applications.
-
-Any developer who has heard about Docker before should be able to follow.
 
 ---
 
@@ -78,22 +71,10 @@ A standard deployment unit that encapsulates an application and all of its depen
 [//]: # (`--name` [Name](https://docs.docker.com/engine/reference/run/#name---name) the container)
 [//]: # (`-p` binds a port on the host to a port on the container)
 
----
-
-.responsive[![Quantum Game with Photons](assets/images/Quantum%20Game%20with%20Photons.png)]
-
----
-
-# Demo 1
-
-Create Docker container
-
-- Find a Docker image
-- Create a Docker container (_run Docker image_)
-
 [//]: # (We were able to start the Quantum Game application without having to worry about anything.  This Quantum Game application could have been written in Java, Node, or assembly for all we care.  All we need is to have the Docker image and the rest is handled by Docker.)
 
 ---
+
 
 # What is a Docker image?
 
@@ -113,6 +94,7 @@ Create Docker container
 
 Overview of `dive` (OS tool for exploring a docker image)
 
+[//]: # (This is a good time to introduce dive, a tool for inspecting a docker image)
 [//]: # (shows Docker image contents broken down by layer, we will show you later how to make use of it)
 
 ---
@@ -169,7 +151,7 @@ Following is a typical _Dockerfile_ that hosts a Java 8 application:
 [//]: # (Docker runs instructions in a Dockerfile in order.)
 [//]: # (FROM: A Dockerfile must begin with a FROM instruction, whichspecifies the Parent Image from which you are building.)
 [//]: # (WORKDIR: sets the working directory for the following command.)
-[//]: # (COPY: copies the application jar file from the source and adds it to the filesystem of the container at the defined path.)
+[//]: # (COPY: copies the application jar file from the source and adds it to the filesystem of the container)
 [//]: # (ENTRYPOINT: runs the Java application)
 
 ---
@@ -221,7 +203,7 @@ class: impact
 
 [//]: # (Each executed instruction creates an intermediate layer or an intermediate image => same thing?)
 [//]: # (every instruction afterwards builds on the previous layer)
-[//]: # (Switch to Albert for Demo 3)
+[//]: # (Switch to Albert for Demo on hot wo build a Docker image)
 
 ---
 
@@ -242,6 +224,7 @@ Build docker image and analyse layers with dive
 
 [//]: # (Notes)
 [//]: # (In the Demo you just saw a copy instruction involving a .jar file. JAR stands for Java archive and is a package file format. )
+
 ---
 
 # FatJAR
@@ -268,7 +251,7 @@ Build docker image and analyse layers with dive
   COPY ./build/libs/*.jar application.jar
   ```
 
-- This creates a new layer every time a new FatJAR file is created
+- This creates a new layer every time a new FatJAR file is created, e.g. every time the code changes
 
 - Creating many large layers may consume large amounts of disk space
 
@@ -292,7 +275,7 @@ Build docker image and analyse layers with dive
 .responsive[![Size required after a week FatJAR.png](assets/images/Size required after a week FatJAR.png)]
 
 [//]: # (Notes)
-[//]: # (Deleting older images is not a trivial task and requires some thought; they might be needed for rollbacks or legal/auditing purposes)
+[//]: # (Deleting older images is not a trivial task and requires some thought because they might be needed for rollbacks or legal/auditing purposes)
 
 ---
 
@@ -359,7 +342,7 @@ Build docker image and analyse layers with dive
 
 [//]: # (Notes)
 [//]: # (How will this work in detail?)
-[//]: # (We will have one extra `COPY` instruction, with our application getting copied after the dependencies)
+[//]: # (We will have one extra `COPY` instruction or layer, with our application getting copied after the dependencies)
 
 
 ---
