@@ -221,6 +221,7 @@ class: impact
 
 [//]: # (Each executed instruction creates an intermediate layer or an intermediate image => same thing?)
 [//]: # (every instruction afterwards builds on the previous layer)
+[//]: # (Switch to Albert for Demo 3)
 
 ---
 
@@ -232,11 +233,20 @@ Build docker image and analyse layers with dive
 - Discuss layers and see docker takes advantage of caching
 - Analyse the docker image, using `dive`
 
+
+---
+
+# JAR file
+
+ .jar (= java archive) is a package file format
+
+[//]: # (Notes)
+[//]: # (In the Demo you just saw a copy instruction involving a .jar file. JAR stands for Java archive and is a package file format. )
 ---
 
 # FatJAR
 
-- A very common way to package a Java application is to create a FatJAR
+- A very common way to package a JVM based application is a **FatJAR**
 
 - A FatJAR contains
   - The application
@@ -262,6 +272,7 @@ Build docker image and analyse layers with dive
 
 - Creating many large layers may consume large amounts of disk space
 
+[//]: # (Notes)
 [//]: # (As you can see in the next image)
 
 ---
@@ -280,7 +291,8 @@ Build docker image and analyse layers with dive
 
 .responsive[![Size required after a week FatJAR.png](assets/images/Size required after a week FatJAR.png)]
 
-[//]: # (Talk about deleting older images is not a trivial task and requires some thought; they might be needed for rollbacks or legal/auditing purposes)
+[//]: # (Notes)
+[//]: # (Deleting older images is not a trivial task and requires some thought; they might be needed for rollbacks or legal/auditing purposes)
 
 ---
 
@@ -298,6 +310,9 @@ Build docker image and analyse layers with dive
 
 .responsive[![FatJAR Layers](assets/images/FatJAR Layers - V1.png)]
 
+[//]: # (Notes)
+[//]: # (What does this mean in detail? We will visiluaze what happens every time the code changes.)
+
 ---
 
 # The challenge - Version 2
@@ -305,8 +320,8 @@ Build docker image and analyse layers with dive
 .responsive[![FatJAR Layers](assets/images/FatJAR Layers - V2.png)]
 
 [//]: # (Notes)
-[//]: # (Docker uses caching as shown in demo 3)
-[//]: # (That still means that every time a dev pushes code, two new layers are built, one of them containing the whole fatjar)
+[//]: # (Even though Docker uses caching as shown in demo 3 and re-uses the first two layers )
+[//]: # (every time the app code changes, two new layers are built, one of them containing the whole fatjar)
 
 ---
 
@@ -315,7 +330,7 @@ Build docker image and analyse layers with dive
 .responsive[![FatJAR Layers](assets/images/FatJAR Layers - V3.png)]
 
 [//]: # (Notes)
-[//]: # (Docker uses caching as shown in demo 3)
+[//]: # (And as you can see, this adds up with every code commit, here we already have 8 layers)
 
 ---
 
@@ -324,13 +339,13 @@ Build docker image and analyse layers with dive
 .responsive[![FatJAR Layers](assets/images/FatJAR Layers - V4.png)]
 
 [//]: # (Notes)
-[//]: # (Docker uses caching as shown in demo 3)
+[//]: # (ending up with 10 layers for 4 code changes)
 
 ---
 
-# Splitting the FatJAR
+# Solution: Splitting the FatJAR
 
-- Some parts of the FatJAR, the dependencies, change less frequently but take up a lot of space
+- Given that some parts of the FatJAR, the dependencies, change less frequently but take up a lot of space
 
   .conclusion[➤ Solution: Splitting the dependencies from the code by creating a new layer and taking advantage of caching]
 
@@ -343,14 +358,20 @@ Build docker image and analyse layers with dive
 .responsive[![Split Dependencies Layers](assets/images/Split Dependencies Layers - V1.png)]
 
 [//]: # (Notes)
-[//]: # (We will have more than one docker `COPY` instruction, with our application copied last)
-[//]: # (Changes to our application will simply require a thinner layer to be created)
+[//]: # (How will this work in detail?)
+[//]: # (We will have one extra `COPY` instruction, with our application getting copied after the dependencies)
+
 
 ---
 
 # Splitting the FatJAR - Version 2
 
 .responsive[![Split Dependencies Layers](assets/images/Split Dependencies Layers - V2.png)]
+
+[//]: # (Notes)
+[//]: # (Here you can see that the dependencies from now on are getting cached, )
+[//]: # (while the application layer contains our code without the dependecides)
+
 
 ---
 
@@ -363,6 +384,8 @@ Build docker image and analyse layers with dive
 # Splitting the FatJAR - Version 4
 
 .responsive[![Split Dependencies Layers](assets/images/Split Dependencies Layers - V4.png)]
+
+[//]: # (So changes to our application will require a much thinner layer to be created)
 
 ---
 
