@@ -391,9 +391,16 @@ $ dive clojure-fat-jar:local
 
 ```bash
 $ cd clojure-layered-jar
-$ clj -m layeredjar
+$ rm -rf .cpcache && rm -rf build && rm -rf doc && rm -rf target
+$ clojure -A:build -m package
+$ mkdir doc
+$ cp -R target/classes doc/
+$ cp -R target/lib/lib doc/
+$ cd doc
+$ java -cp "classes:lib/*" layered_jar.main
 $ docker build . -t clojure-layered-jar:local
 $ docker run -it --rm -p 8080:8080 --name clojure-layered-jar clojure-layered-jar:local
+$ dive clojure-layered-jar:local
 ```
 
 ## Other technologies
