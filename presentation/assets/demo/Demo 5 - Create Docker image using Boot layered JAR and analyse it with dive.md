@@ -1,17 +1,17 @@
 # Demo 5
 
-Create Docker image using layered JAR and analyse it with dive
+Create Docker image using Boot layered JAR and analyse it with dive
+
+1. Go to example
+
+   ```bash
+   $ cd boot-layered-jar
+   ```
 
 1. Build the project
 
    ```bash
-   $ ./gradlew boot-layered-jar:clean boot-layered-jar:build
-   ```
-
-1. Navigate to the project directory
-
-   ```bash
-   $ cd boot-layered-jar
+   $ ./gradlew clean build
    ```
 
 1. Analyse the multistage `Dockerfile`

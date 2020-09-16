@@ -1,6 +1,6 @@
 # Demo 3
 
-Build Docker image and analyse layers with dive
+Build Boot FatJAR Docker image and analyse layers with dive
 
 1. Go to example
 

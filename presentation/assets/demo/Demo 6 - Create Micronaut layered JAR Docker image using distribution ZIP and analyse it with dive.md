@@ -1,17 +1,23 @@
 # Demo 6
 
-Create Docker image using distribution ZIP and analyse it with dive
+Create Micronaut layered JAR Docker image using distribution ZIP and analyse it with dive
+
+1. Go to example
+
+   ```bash
+   $ cd micronaut-layered-jar
+   ```
 
 1. Build the project
 
    ```bash
-   $ ./gradlew micronaut-layered-jar:clean micronaut-layered-jar:build
+   $ ./gradlew clean build
    ```
 
 1. Navigate to the distributions directory
 
    ```bash
-   $ cd micronaut-layered-jar/build/distributions
+   $ cd build/distributions
    ```
 
 1. List the directory's content
@@ -23,73 +29,73 @@ Create Docker image using distribution ZIP and analyse it with dive
    This should contain two archives
 
    ```bash
-   -rw-r--r--   1 albertattard  staff  13690880 Apr 27 12:34 micronaut-layered-jar-1.0.tar
-   -rw-r--r--   1 albertattard  staff  12149686 Apr 27 12:34 micronaut-layered-jar-1.0.zip
+   -rw-r--r--   1 albertattard  staff  13690880 Apr 27 12:34 micronaut-layered-jar.tar
+   -rw-r--r--   1 albertattard  staff  12149686 Apr 27 12:34 micronaut-layered-jar.zip
    ```
 
 1. Unpack the archive
 
    ```bash
-   $ rm micronaut-layered-jar-1.0.tar
-   $ unzip micronaut-layered-jar-1.0.zip && rm micronaut-layered-jar-1.0.zip
+   $ rm micronaut-layered-jar.tar
+   $ unzip micronaut-layered-jar.zip && rm micronaut-layered-jar.zip
    ```
 
    The archive contains our application and its dependencies
 
    ```bash
-   Archive:  micronaut-layered-jar-1.0.zip
-      creating: micronaut-layered-jar-1.0/
-      creating: micronaut-layered-jar-1.0/lib/
-     inflating: micronaut-layered-jar-1.0/lib/application.jar
-     inflating: micronaut-layered-jar-1.0/lib/micronaut-http-client-2.0.0.jar
-     inflating: micronaut-layered-jar-1.0/lib/micronaut-http-client-core-2.0.0.jar
-     inflating: micronaut-layered-jar-1.0/lib/micronaut-http-server-netty-2.0.0.jar
-     inflating: micronaut-layered-jar-1.0/lib/micronaut-http-server-2.0.0.jar
-     inflating: micronaut-layered-jar-1.0/lib/micronaut-runtime-2.0.0.jar
-     inflating: micronaut-layered-jar-1.0/lib/micronaut-validation-2.0.0.jar
-     inflating: micronaut-layered-jar-1.0/lib/micronaut-http-netty-2.0.0.jar
-     inflating: micronaut-layered-jar-1.0/lib/micronaut-websocket-2.0.0.jar
-     inflating: micronaut-layered-jar-1.0/lib/micronaut-router-2.0.0.jar
-     inflating: micronaut-layered-jar-1.0/lib/micronaut-http-2.0.0.jar
-     inflating: micronaut-layered-jar-1.0/lib/micronaut-aop-2.0.0.jar
-     inflating: micronaut-layered-jar-1.0/lib/micronaut-buffer-netty-2.0.0.jar
-     inflating: micronaut-layered-jar-1.0/lib/micronaut-inject-2.0.0.jar
-     inflating: micronaut-layered-jar-1.0/lib/logback-classic-1.2.3.jar
-     inflating: micronaut-layered-jar-1.0/lib/netty-handler-proxy-4.1.48.Final.jar
-     inflating: micronaut-layered-jar-1.0/lib/netty-codec-http2-4.1.48.Final.jar
-     inflating: micronaut-layered-jar-1.0/lib/netty-codec-http-4.1.48.Final.jar
-     inflating: micronaut-layered-jar-1.0/lib/netty-handler-4.1.48.Final.jar
-     inflating: micronaut-layered-jar-1.0/lib/netty-codec-socks-4.1.48.Final.jar
-     inflating: micronaut-layered-jar-1.0/lib/netty-codec-4.1.48.Final.jar
-     inflating: micronaut-layered-jar-1.0/lib/netty-transport-4.1.48.Final.jar
-     inflating: micronaut-layered-jar-1.0/lib/netty-buffer-4.1.48.Final.jar
-     inflating: micronaut-layered-jar-1.0/lib/netty-resolver-4.1.48.Final.jar
-     inflating: micronaut-layered-jar-1.0/lib/netty-common-4.1.48.Final.jar
-     inflating: micronaut-layered-jar-1.0/lib/jackson-datatype-jdk8-2.11.0.jar
-     inflating: micronaut-layered-jar-1.0/lib/jackson-datatype-jsr310-2.11.0.jar
-     inflating: micronaut-layered-jar-1.0/lib/jackson-databind-2.11.0.jar
-     inflating: micronaut-layered-jar-1.0/lib/jackson-annotations-2.11.0.jar
-     inflating: micronaut-layered-jar-1.0/lib/jackson-core-2.11.0.jar
-     inflating: micronaut-layered-jar-1.0/lib/micronaut-core-2.0.0.jar
-     inflating: micronaut-layered-jar-1.0/lib/javax.annotation-api-1.3.2.jar
-     inflating: micronaut-layered-jar-1.0/lib/spotbugs-annotations-4.0.3.jar
-     inflating: micronaut-layered-jar-1.0/lib/jsr305-3.0.2.jar
-     inflating: micronaut-layered-jar-1.0/lib/snakeyaml-1.26.jar
-     inflating: micronaut-layered-jar-1.0/lib/slf4j-api-1.7.26.jar
-     inflating: micronaut-layered-jar-1.0/lib/rxjava-2.2.10.jar
-     inflating: micronaut-layered-jar-1.0/lib/reactive-streams-1.0.3.jar
-     inflating: micronaut-layered-jar-1.0/lib/validation-api-2.0.1.Final.jar
-     inflating: micronaut-layered-jar-1.0/lib/logback-core-1.2.3.jar
-     inflating: micronaut-layered-jar-1.0/lib/javax.inject-1.jar
-      creating: micronaut-layered-jar-1.0/bin/
-     inflating: micronaut-layered-jar-1.0/bin/micronaut-layered-jar
-     inflating: micronaut-layered-jar-1.0/bin/micronaut-layered-jar.bat
+   Archive:  micronaut-layered-jar.zip
+      creating: micronaut-layered-jar/
+      creating: micronaut-layered-jar/lib/
+     inflating: micronaut-layered-jar/lib/application.jar
+     inflating: micronaut-layered-jar/lib/micronaut-http-client-2.0.0.jar
+     inflating: micronaut-layered-jar/lib/micronaut-http-client-core-2.0.0.jar
+     inflating: micronaut-layered-jar/lib/micronaut-http-server-netty-2.0.0.jar
+     inflating: micronaut-layered-jar/lib/micronaut-http-server-2.0.0.jar
+     inflating: micronaut-layered-jar/lib/micronaut-runtime-2.0.0.jar
+     inflating: micronaut-layered-jar/lib/micronaut-validation-2.0.0.jar
+     inflating: micronaut-layered-jar/lib/micronaut-http-netty-2.0.0.jar
+     inflating: micronaut-layered-jar/lib/micronaut-websocket-2.0.0.jar
+     inflating: micronaut-layered-jar/lib/micronaut-router-2.0.0.jar
+     inflating: micronaut-layered-jar/lib/micronaut-http-2.0.0.jar
+     inflating: micronaut-layered-jar/lib/micronaut-aop-2.0.0.jar
+     inflating: micronaut-layered-jar/lib/micronaut-buffer-netty-2.0.0.jar
+     inflating: micronaut-layered-jar/lib/micronaut-inject-2.0.0.jar
+     inflating: micronaut-layered-jar/lib/logback-classic-1.2.3.jar
+     inflating: micronaut-layered-jar/lib/netty-handler-proxy-4.1.48.Final.jar
+     inflating: micronaut-layered-jar/lib/netty-codec-http2-4.1.48.Final.jar
+     inflating: micronaut-layered-jar/lib/netty-codec-http-4.1.48.Final.jar
+     inflating: micronaut-layered-jar/lib/netty-handler-4.1.48.Final.jar
+     inflating: micronaut-layered-jar/lib/netty-codec-socks-4.1.48.Final.jar
+     inflating: micronaut-layered-jar/lib/netty-codec-4.1.48.Final.jar
+     inflating: micronaut-layered-jar/lib/netty-transport-4.1.48.Final.jar
+     inflating: micronaut-layered-jar/lib/netty-buffer-4.1.48.Final.jar
+     inflating: micronaut-layered-jar/lib/netty-resolver-4.1.48.Final.jar
+     inflating: micronaut-layered-jar/lib/netty-common-4.1.48.Final.jar
+     inflating: micronaut-layered-jar/lib/jackson-datatype-jdk8-2.11.0.jar
+     inflating: micronaut-layered-jar/lib/jackson-datatype-jsr310-2.11.0.jar
+     inflating: micronaut-layered-jar/lib/jackson-databind-2.11.0.jar
+     inflating: micronaut-layered-jar/lib/jackson-annotations-2.11.0.jar
+     inflating: micronaut-layered-jar/lib/jackson-core-2.11.0.jar
+     inflating: micronaut-layered-jar/lib/micronaut-core-2.0.0.jar
+     inflating: micronaut-layered-jar/lib/javax.annotation-api-1.3.2.jar
+     inflating: micronaut-layered-jar/lib/spotbugs-annotations-4.0.3.jar
+     inflating: micronaut-layered-jar/lib/jsr305-3.0.2.jar
+     inflating: micronaut-layered-jar/lib/snakeyaml-1.26.jar
+     inflating: micronaut-layered-jar/lib/slf4j-api-1.7.26.jar
+     inflating: micronaut-layered-jar/lib/rxjava-2.2.10.jar
+     inflating: micronaut-layered-jar/lib/reactive-streams-1.0.3.jar
+     inflating: micronaut-layered-jar/lib/validation-api-2.0.1.Final.jar
+     inflating: micronaut-layered-jar/lib/logback-core-1.2.3.jar
+     inflating: micronaut-layered-jar/lib/javax.inject-1.jar
+      creating: micronaut-layered-jar/bin/
+     inflating: micronaut-layered-jar/bin/micronaut-layered-jar
+     inflating: micronaut-layered-jar/bin/micronaut-layered-jar.bat
    ```
 
 1. Explore the directory
 
    ```bash
-   $ cd micronaut-layered-jar-1.0
+   $ cd micronaut-layered-jar
    $ ls -ls
    ```
 
@@ -362,14 +368,12 @@ Create Docker image using distribution ZIP and analyse it with dive
 1. Build the project
 
    ```bash
-   $ cd ..
-   $ ./gradlew micronaut-layered-jar:clean micronaut-layered-jar:build
+   $ ./gradlew clean build
    ```
 
 1. Build the Docker image
 
    ```bash
-   $ cd micronaut-layered-jar
    $ docker build . -t micronaut-layered-jar:local
    ```
 

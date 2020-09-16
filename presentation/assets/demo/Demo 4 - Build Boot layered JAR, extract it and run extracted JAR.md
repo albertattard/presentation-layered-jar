@@ -1,6 +1,6 @@
 # Demo 4
 
-Build layered JAR, extract it and run extracted JAR
+Build Boot layered JAR, extract it and run extracted JAR
 
 1. Go to example
 
