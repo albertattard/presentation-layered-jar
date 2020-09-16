@@ -205,7 +205,7 @@ class: impact
 
 ---
 
-# Demo 
+# Demo
 
 **Build docker image and analyse layers with _dive_**
 
@@ -596,6 +596,15 @@ Create docker image using distribution ZIP and analyse it with dive
 # Comparison
 
 .responsive[![Comparing Layer Sizes](assets/images/Comparing Layer Sizes - Micronaut.png)]
+
+---
+
+# Clojure
+
+Clojure is a functional programming language that runs on the JVM
+
+.responsive[![Clojure](assets/images/Clojure.png)]
+[https://clojure.org/](https://clojure.org/)
 
 ---
 

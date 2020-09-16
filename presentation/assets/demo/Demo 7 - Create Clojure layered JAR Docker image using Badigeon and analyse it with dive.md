@@ -104,7 +104,7 @@ Create Clojure layered JAR Docker image using Badigeon and analyse it with dive
    RUN clojure -A:build -m package
    RUN mkdir ./target/app && mv ./target/classes/layered_jar ./target/app/layered_jar
 
-	 FROM adoptopenjdk:8u262-b10-jre-hotspot
+   FROM adoptopenjdk:8u262-b10-jre-hotspot
    WORKDIR /opt/app
    COPY --from=builder /opt/app/target/lib/lib ./lib
    COPY --from=builder /opt/app/target/classes ./classes
