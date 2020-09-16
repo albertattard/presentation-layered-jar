@@ -4,6 +4,7 @@
 
 1. [Java 8](https://openjdk.java.net/projects/jdk8/) or above
 1. [Docker](https://www.docker.com/)
+1. [Clojure](https://clojure.org/) if interested in the Clojure examples
 
 Java 8 is used in this presentation as this is the most popular version of Java followed by [Java 11]( https://openjdk.java.net/projects/jdk/11/) ([reference](https://www.jrebel.com/blog/2020-java-technology-report)) to date.
 
@@ -20,6 +21,7 @@ There are four examples in total, two with Spring boot and two with Micronaut
 1. [Micronaut Fat JAR](#micronaut-fat-jar)
 1. [Micronaut Layered JAR](#micronaut-layered-jar)
 1. [Clojure Fat JAR](#clojure-fat-jar)
+1. [Clojure Layered JAR](#clojure-layered-jar)
 
 ### Spring Boot Fat JAR
 

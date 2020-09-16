@@ -20,10 +20,10 @@ Create Micronaut layered JAR Docker image using distribution ZIP and analyse it 
    $ cd build/distributions
    ```
 
-1. List the directory's content
+   List the directory's content
 
    ```bash
-   $ ls -la
+   $ ls -l
    ```
 
    This should contain two archives
@@ -196,7 +196,7 @@ Create Micronaut layered JAR Docker image using distribution ZIP and analyse it 
 
    ```bash
    $ cd ../lib/
-   $ ls -la
+   $ ls -l
    ```
 
    The application JAR (not FatJAR) and its dependencies (and the transitive dependencies) are found here
