@@ -1,7 +1,0 @@
-rootProject.name = 'presentation-layered-jar'
-
-include('boot-fat-jar')
-include('boot-layered-jar')
-
-include('micronaut-fat-jar')
-include('micronaut-layered-jar')

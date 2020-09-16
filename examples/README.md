@@ -23,8 +23,16 @@ There are four examples in total, two with Spring boot and two with Micronaut
 
 ### Spring Boot Fat JAR
 
+1. Go to example
+
    ```bash
-   $ ./gradlew boot-fat-jar:clean boot-fat-jar:build
+   $ cd boot-fat-jar
+   ```
+
+1. Build the application
+
+   ```bash
+   $ ./gradlew clean build
 
    ...
 
@@ -35,7 +43,7 @@ There are four examples in total, two with Spring boot and two with Micronaut
 1. Build the docker image
 
    ```bash
-   $ docker build ./boot-fat-jar -t boot-fat-jar:local
+   $ docker build . -t boot-fat-jar:local
 
    Sending build context to Docker daemon  16.64MB
    Step 1/4 : FROM adoptopenjdk:8u252-b09-jre-hotspot-bionic as builder
@@ -81,10 +89,16 @@ There are four examples in total, two with Spring boot and two with Micronaut
 
 ### Spring Boot Layered JAR
 
-1. Build the project
+1. Go to example
 
    ```bash
-   $ ./gradlew boot-layered-jar:clean boot-layered-jar:build
+   $ cd boot-layered-jar
+   ```
+
+1. Build the application
+
+   ```bash
+   $ ./gradlew clean build
 
    ...
 
@@ -95,7 +109,7 @@ There are four examples in total, two with Spring boot and two with Micronaut
 1. Build the docker image
 
    ```bash
-   $ docker build ./boot-layered-jar -t boot-layered-jar:local
+   $ docker build . -t boot-layered-jar:local
 
    Sending build context to Docker daemon  16.67MB
    Step 1/11 : FROM adoptopenjdk:8u252-b09-jre-hotspot-bionic as builder
@@ -161,10 +175,16 @@ There are four examples in total, two with Spring boot and two with Micronaut
 
 ### Micronaut Fat JAR
 
-1. Build the project
+1. Go to example
 
    ```bash
-   $ ./gradlew micronaut-fat-jar:clean micronaut-fat-jar:build
+   $ cd micronaut-fat-jar
+   ```
+
+1. Build the application
+
+   ```bash
+   $ ./gradlew clean build
 
    ...
 
@@ -175,7 +195,7 @@ There are four examples in total, two with Spring boot and two with Micronaut
 1. Build the docker image
 
    ```bash
-   $ docker build ./micronaut-fat-jar -t micronaut-fat-jar:local
+   $ docker build . -t micronaut-fat-jar:local
 
    Sending build context to Docker daemon  65.07MB
    Step 1/4 : FROM adoptopenjdk:8u252-b09-jre-hotspot-bionic
@@ -221,10 +241,16 @@ There are four examples in total, two with Spring boot and two with Micronaut
 
 ### Micronaut Layered JAR
 
-1. Build the project
+1. Go to example
 
    ```bash
-   $ ./gradlew micronaut-layered-jar:clean micronaut-layered-jar:build
+   $ cd micronaut-layered-jar
+   ```
+
+1. Build the application
+
+   ```bash
+   $ ./gradlew clean build
 
    ...
 
@@ -235,7 +261,7 @@ There are four examples in total, two with Spring boot and two with Micronaut
 1. Build the docker image
 
    ```bash
-   $ docker build ./micronaut-layered-jar -t micronaut-layered-jar:local
+   $ docker build . -t micronaut-layered-jar:local
 
    Sending build context to Docker daemon  26.02MB
    Step 1/11 : FROM alpine:3.12.0 as builder
@@ -349,8 +375,11 @@ There are four examples in total, two with Spring boot and two with Micronaut
 ### Clojure Fat JAR
 
 ```bash
-$ clj -e "(compile 'layeredjar)"
-$ clj -A:fatjar --main-class layeredjar
+$ cd clojure-fat-jar
+$ mkdir classes
+$ clj -e "(compile 'layered-jar.main)"
+$ clj -A:fatjar --main-class layered_jar.main
+$ java -jar build/libs/clojure-fat-jar-1.0.jar
 $ docker build . -t clojure-fat-jar:local
 $ docker run -it --rm -p 8080:8080 --name clojure-fat-jar clojure-fat-jar:local
 ```
@@ -358,6 +387,7 @@ $ docker run -it --rm -p 8080:8080 --name clojure-fat-jar clojure-fat-jar:local
 ### Clojure Layered JAR
 
 ```bash
+$ cd clojure-layered-jar
 $ clj -m layeredjar
 $ docker build . -t clojure-layered-jar:local
 $ docker run -it --rm -p 8080:8080 --name clojure-layered-jar clojure-layered-jar:local
