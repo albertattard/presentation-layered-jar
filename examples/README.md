@@ -376,12 +376,15 @@ There are four examples in total, two with Spring boot and two with Micronaut
 
 ```bash
 $ cd clojure-fat-jar
+$ rm -rf .cpcache && rm -rf build && rm -rf classes
 $ mkdir classes
 $ clj -e "(compile 'layered-jar.main)"
 $ clj -A:fatjar --main-class layered_jar.main
-$ java -jar build/libs/clojure-fat-jar-1.0.jar
+$ java -jar build/libs/clojure-fat-jar.jar
 $ docker build . -t clojure-fat-jar:local
 $ docker run -it --rm -p 8080:8080 --name clojure-fat-jar clojure-fat-jar:local
+$ docker exec -it clojure-fat-jar /bin/bash
+$ dive clojure-fat-jar:local
 ```
 
 ### Clojure Layered JAR

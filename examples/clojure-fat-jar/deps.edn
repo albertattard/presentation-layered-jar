@@ -6,6 +6,4 @@
            org.slf4j/slf4j-simple       {:mvn/version "1.7.30"}}
  :paths   ["src" "classes"]
  :aliases {:fatjar {:extra-deps {uberdeps {:mvn/version "1.0.1"}}
-                    :main-opts  ["-m" "uberdeps.uberjar" "--target" "build/libs/clojure-fat-jar-1.0.jar"]}}}
-
-
+                    :main-opts  ["-m" "uberdeps.uberjar" "--target" "build/libs/clojure-fat-jar.jar"]}}}
