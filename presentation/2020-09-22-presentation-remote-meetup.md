@@ -35,7 +35,6 @@ class: impact
 ## Spring Boot
 ## Beyond Spring Boot
 
-
 ---
 
 class: impact
@@ -64,7 +63,7 @@ A standard deployment unit that encapsulates an application and all of its depen
       spkane/quantum-game:latest
   ```
 
-  .conclusion[➤ We don't have to worry about any specific runtime environment or any particular dependency version as everything is encapsulated in the container]
+  .conclusion[➤ We don't have to worry about any specific runtime environment or any particular dependency version as everything is encapsulated in the Docker container]
 
 [//]: # (Notes)
 [//]: # (`--rm` [Clean up](https://docs.docker.com/engine/reference/run/#clean-up---rm)/deletes the container once the container stops))
@@ -75,35 +74,34 @@ A standard deployment unit that encapsulates an application and all of its depen
 
 ---
 
-
 # What is a Docker image?
 
 - A **read-only** filesystem that contains
 
-  - operating system
-  - programs needed by the application (e.g. Java Runtime Environment)
-  - application executable, its dependencies, and configuration
+  - An operating system
+  - The programs needed by the application (e.g. Java Runtime Environment)
+  - The application executable, its dependencies, and configuration
 
 - **Immutable** (cannot be modified once built)
 
-.conclusion[➤ New image gets created **every time** a new version of our application is dockerized]
+  .conclusion[➤ New image gets created every time a new version of our application is dockerized]
 
-[//]: # (This is a good time to introduce dive, a tool for inspecting a docker image)
-
+[//]: # (A Docker image is a file system with all the programs already install and all the files you need saved in the location you need them)
+[//]: # (This is a good time to introduce dive, a tool for inspecting a Docker image)
 
 ---
 
 # Demo 2
 
-Overview of `dive` (OS tool for exploring a docker image)
+Overview of `dive`, a tool for exploring a Docker image and its contents
 
-[//]: # (shows Docker image contents broken down by layer, we will show you later how to make use of it)
+[//]: # (Shows Docker image contents broken down by layer, we will show you later how to make use of it)
 
 ---
 
 # How is a Docker image created?
 
-- By building a _Dockerfile_ :
+- By building a _Dockerfile_:
 
   ```bash
   $ docker build . -t boot-fat-jar:local
