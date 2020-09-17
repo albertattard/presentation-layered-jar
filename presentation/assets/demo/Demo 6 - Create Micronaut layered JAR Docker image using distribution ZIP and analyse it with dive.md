@@ -96,7 +96,7 @@ Create Micronaut layered JAR Docker image using distribution ZIP and analyse it 
 
    ```bash
    $ cd micronaut-layered-jar
-   $ ls -ls
+   $ ls -l
    ```
 
    The archive contains two directories.
@@ -162,7 +162,7 @@ Create Micronaut layered JAR Docker image using distribution ZIP and analyse it 
 
    ```bash
    $ cd bin
-   $ ls -ls
+   $ ls -l
    ```
 
    There are two scripts, one for Linux/MAC and the other for Windows

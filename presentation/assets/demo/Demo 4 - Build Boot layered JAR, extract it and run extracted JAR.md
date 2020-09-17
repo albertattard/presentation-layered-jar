@@ -23,7 +23,7 @@ Build Boot layered JAR, extract it and run extracted JAR
 1. List the directory's content
 
    ```bash
-   $ ls -la
+   $ ls -l
    ```
 
    This should only contains the FatJAR
@@ -88,7 +88,7 @@ Build Boot layered JAR, extract it and run extracted JAR
    The directory should not contain four directories
 
    ```bash
-   $ ls -la
+   $ ls -l
    ```
 
 1. Try to run the application
@@ -116,7 +116,7 @@ Build Boot layered JAR, extract it and run extracted JAR
    List the directory content
 
    ```bash
-   $ ls -la
+   $ ls -l
    ```
 
    There should be three directories

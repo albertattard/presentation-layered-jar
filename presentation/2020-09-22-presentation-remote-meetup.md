@@ -45,7 +45,7 @@ class: impact
 
 # What is a Docker container?
 
-A standard deployment unit that encapsulates an application and all of its dependencies
+- A standard deployment unit that encapsulates an application and all of its dependencies
 
 .responsive[![Docker Container](assets/images/Docker Container.png)]
 
@@ -91,10 +91,14 @@ A standard deployment unit that encapsulates an application and all of its depen
 
 ---
 
-# Demo 2
+# Demo
 
-Overview of `dive`, a tool for exploring a Docker image and its contents
+**Analyse a Docker image with _dive_**
 
+- Overview of _dive_, a tool for exploring a Docker image and its contents
+- Analyse a Docker image with _dive_
+
+[//]: # (Demo 2)
 [//]: # (Shows Docker image contents broken down by layer, we will show you later how to make use of it)
 
 ---
@@ -107,9 +111,9 @@ Overview of `dive`, a tool for exploring a Docker image and its contents
   $ docker build . -t boot-fat-jar:local
   ```
 
-  The above command creates an image and tags it as `boot-fat-jar:local`
+  The above command creates a Docker image and tags it as `boot-fat-jar:local`
 
-- We can run this Docker image, creating a Docker container when doing so, once this is built
+- We can run this Docker image, creating a Docker container when doing so, using the given tag `boot-fat-jar:local`
 
   ```bash
   $ docker run \
@@ -126,16 +130,17 @@ Overview of `dive`, a tool for exploring a Docker image and its contents
 
 ---
 
-# What is a Dockerfile?
+# What is a _Dockerfile_?
 
-A text file, usually named `Dockerfile`, that contains a set of instructions (used to create the Docker image)
+- A text file, usually named `Dockerfile`, that contains a set of instructions, used to create the Docker image
 
+- The _Dockerfile_ is the source file used to create the Docker image
 
 ---
 
-# What does a Dockerfile look like?
+# How does a _Dockerfile_ look like?
 
-Following is a typical _Dockerfile_ that hosts a Java 8 application:
+- Following is a typical _Dockerfile_ that hosts a Java 8 application:
 
   ```dockerfile
   FROM adoptopenjdk:8u262-b10-jre-hotspot
@@ -145,11 +150,11 @@ Following is a typical _Dockerfile_ that hosts a Java 8 application:
   ```
 
 [//]: # (Notes)
-[//]: # (Docker runs instructions in a Dockerfile in order.)
-[//]: # (FROM: A Dockerfile must begin with a FROM instruction, which specifies the Parent Image from which you are building.)
-[//]: # (WORKDIR: sets the working directory for the following command.)
-[//]: # (COPY: copies the application jar file from the source and adds it to the filesystem of the container)
-[//]: # (ENTRYPOINT: runs the Java application)
+[//]: # (Docker runs instructions in a _Dockerfile_ in order)
+[//]: # (`FROM`: A_Dockerfile_must begin with a FROM instruction, which specifies the Parent Image from which you are building or start from `scratch`, known as [base image](https://docs.docker.com/develop/develop-images/baseimages/).)
+[//]: # (`WORKDIR`: sets the working directory for the following commands.  This is the starting working directory when the container starts.)
+[//]: # (`COPY`: copies the application jar file from the host (laptop) to the filesystem of the Docker image.)
+[//]: # (`ENTRYPOINT`: runs the command with the given command line arguments, in this case a Java application)
 
 ---
 
@@ -159,8 +164,8 @@ Following is a typical _Dockerfile_ that hosts a Java 8 application:
 
 [//]: # (Notes)
 [//]: # (Here you can see the whole Docker lifecycle that we just walked through starting from the end.)
-[//]: # (The instructions inside the Dockerfile build the Docker image which gets executed as a Docker container.)
-[//]: # (For today's topic we will focus on the first two stages, Dockerfiles and images.)
+[//]: # (The instructions inside the _Dockerfile_ build the Docker image which gets executed as a Docker container.)
+[//]: # (For today's topic we will focus on the first two stages, _Dockerfile_ and Docker image.)
 
 ---
 
@@ -174,7 +179,7 @@ class: impact
 
 # What are layers?
 
-- Remember our _Dockerfile_:
+- Remember our _Dockerfile_?
 
   ```dockerfile
   FROM adoptopenjdk:8u262-b10-jre-hotspot
@@ -183,11 +188,12 @@ class: impact
   ENTRYPOINT ["java", "-jar", "application.jar"]
   ```
 
-- The above Dockerfile has four layers:
-  - `FROM ...`
-  - `WORKDIR ...`
-  - `COPY ...`
-  - `ENTRYPOINT ...`
+- The above _Dockerfile_ has four layers
+
+  1. `FROM ...`
+  1. `WORKDIR ...`
+  1. `COPY ...`
+  1. `ENTRYPOINT ...`
 
 [//]: # (It has 4 layers, each starting with an instruction. Basically every line is a layer.)
 
@@ -207,9 +213,9 @@ class: impact
 
 **Build docker image and analyse layers with _dive_**
 
-- Build a docker image
-- Discuss layers and see docker takes advantage of caching
-- Analyse the docker image, using `dive`
+- Build a Docker image
+- Discuss layers and see Docker takes advantage of caching
+- Analyse the Docker image, using _dive_
 
 [//]: # (Demo 3)
 
@@ -217,12 +223,10 @@ class: impact
 
 # JAR file
 
+.jar (= java archive) is a package file format
+
 [//]: # (Notes)
-[//]: # (In the Demo you just saw a copy instruction involving a .jar file. JAR stands for Java archive and is a package file format. )
-
- .jar (= java archive) is a package file format
-
-
+[//]: # (In the Demo you just saw a copy instruction involving a `.jar` file.  JAR stands for Java ARchive and is a package file format based on ZIP.  Java applications are package as JAR files.  JAR is not the only format as Java also supports WAR and EAR.  These are used by web containers and application containers respectively and common in JEE.)
 
 ---
 
@@ -231,26 +235,31 @@ class: impact
 - A very common way to package a JVM based application is a **FatJAR**
 
 - A FatJAR contains
-  - The application
-  - All its dependencies
 
-- it is standalone and can be executed like this:
+  - The application
+  - Resources that the application needs
+  - The application dependencies
+
+- It is standalone and can be executed using the following command
 
   ```bash
   $ java -jar application.jar
   ```
 
+[//]: # (Notes)
+[//]: # (A FatJAR is very convenient as packages the whole application into a single file.  All we need to do is distribute this file and run a simple command to start the application.)
+
 ---
 
 # FatJAR in a Docker image
 
-- The FatJAR is copied from our laptop into the Docker image using the `COPY` instruction:
+- The FatJAR is copied from our laptop into the Docker image using the `COPY` instruction
 
   ```dockerfile
   COPY ./build/libs/*.jar application.jar
   ```
 
-- This creates a new layer every time a new FatJAR file is created, e.g. every time the code changes
+- Everytime the FatJAR is copied into a Docker image, a new layer is created
 
 - Creating many large layers may consume large amounts of disk space
 
@@ -278,38 +287,38 @@ class: impact
 
 ---
 
-# The challenge
+# Small change create large layer
 
 - Our application (FatJAR) contains our code **and** its dependencies
 
 - When new features are added, the dependencies are not necessarily updated
 
-  .conclusion[However: each small change in the code, creates a new docker layer of about 16MB in size]
+  .conclusion[➤ However, each small change in the code, creates a new docker layer of about 16MB in size]
 
 ---
 
-# The challenge - Version 1
+# The FatJAR application - Version 1
 
 .responsive[![FatJAR Layers](assets/images/FatJAR Layers - V1.png)]
 
 [//]: # (Notes)
-[//]: # (What does this mean in detail? We will visiluaze what happens every time the code changes.)
-[//]: # (Here you can see the layer where the code change is happenening)
+[//]: # (What does this mean in detail? We will visualize what happens every time the code changes.)
+[//]: # (Here you can see the layer where the code change is happenning)
 
 
 ---
 
-# The challenge - Version 2
+# The FatJAR application - Version 2
 
 .responsive[![FatJAR Layers](assets/images/FatJAR Layers - V2.png)]
 
 [//]: # (Notes)
 [//]: # (Even though Docker uses caching as shown in demo 3 and re-uses the first two layers )
-[//]: # (every time the app code changes, two new layers are built, one of them containing the whole fatjar)
+[//]: # (every time the app code changes, two new layers are built, one of them containing the whole FatJAR)
 
 ---
 
-# The challenge - Version 3
+# The FatJAR application - Version 3
 
 .responsive[![FatJAR Layers](assets/images/FatJAR Layers - V3.png)]
 
@@ -318,7 +327,7 @@ class: impact
 
 ---
 
-# The challenge - Version 4
+# The FatJAR application - Version 4
 
 .responsive[![FatJAR Layers](assets/images/FatJAR Layers - V4.png)]
 
@@ -327,13 +336,11 @@ class: impact
 
 ---
 
-# Solution: Splitting the FatJAR
+# An alternative approach
 
-- Given that some parts of the FatJAR, the dependencies, change less frequently but take up a lot of space
+- Some parts of the FatJAR, such as the dependencies, change less frequently than others, yet take up a most of the space
 
-  .conclusion[➤ Solution: Splitting the dependencies from the code by creating a new layer and taking advantage of caching]
-
-
+  .conclusion[➤ Solution: Separating the dependencies from the code by creating a new layer and taking advantage of Docker layer caching]
 
 ---
 
@@ -343,8 +350,7 @@ class: impact
 
 [//]: # (Notes)
 [//]: # (How will this work in detail?)
-[//]: # (Dependencies and code now in two seperate layers)
-
+[//]: # (Dependencies and code now in two separate layers)
 
 ---
 
@@ -353,9 +359,7 @@ class: impact
 .responsive[![Split Dependencies Layers](assets/images/Split Dependencies Layers - V2.png)]
 
 [//]: # (Notes)
-[//]: # (Here you can see that the dependencies from now on are getting cached, )
-[//]: # (while the application layer contains our code without the dependecides)
-
+[//]: # (Here you can see that the dependencies from now on are getting cached, while the application layer contains our code without the dependencies)
 
 ---
 
@@ -381,10 +385,10 @@ class: impact
 
 # Spring Boot
 
-Spring Boot is a very popular framework that promotes productivity
+- Spring Boot is a very popular framework that promotes productivity
 
-.responsive[![Spring Boot](assets/images/Spring Boot.png)]
-[https://spring.io/projects/spring-boot](https://spring.io/projects/spring-boot)
+  .responsive[![Spring Boot](assets/images/Spring Boot.png)]  
+  [https://spring.io/projects/spring-boot](https://spring.io/projects/spring-boot)
 
 ---
 
@@ -408,7 +412,7 @@ Spring Boot is a very popular framework that promotes productivity
 
 # How does this work?
 
-- Build the Layered JAR (using _Gradle_)
+- Build the Layered JAR (using _Gradle_ or _Maven_)
 
 - Extract the Layered JAR (using _layertool_)
 
@@ -418,19 +422,21 @@ Spring Boot is a very popular framework that promotes productivity
 
 ---
 
-# Demo 4
+# Demo
 
-Build layered JAR, extract it and run extracted JAR
+**Build layered JAR, extract it and run extracted JAR**
 
 - Build layered JAR
 - Extract Layered JAR
 - Run Extracted JAR
 
+[//]: # (Demo 4)
+
 ---
 
-# How does this work with docker?
+# How does this work with Docker?
 
-- We can take advantage of multistage docker builds
+- We can take advantage of multistage Docker builds
 
   ```dockerfile
   FROM adoptopenjdk:8u262-b10-jre-hotspot as builder
@@ -451,7 +457,7 @@ Build layered JAR, extract it and run extracted JAR
 
 # Builder stage
 
-- Copy the layered JAR created by Gradle
+- Copy the layered JAR created by Gradle, outside from Docker
 
   ```Dockerfile
   FROM adoptopenjdk:8u262-b10-jre-hotspot as builder
@@ -495,12 +501,14 @@ Build layered JAR, extract it and run extracted JAR
 
 ---
 
-# Demo 5
+# Demo
 
-Create docker image using layered JAR and analyse it with dive
+**Create Docker image using layered JAR and analyse it with dive**
 
-- Create docker image (using multistage and layered JAR)
-- Inspect with Dive
+- Create Docker image, using multistage and layered JAR
+- Inspect with _dive_
+
+[//]: # (Demo 5)
 
 ---
 
@@ -525,10 +533,10 @@ class: impact
 
 # Micronaut
 
-Micronaut is reflection free alternative framework to Spring Boot
+- Micronaut is reflection free alternative framework to Spring Boot
 
-.responsive[![Micronaut](assets/images/Micronaut.png)]
-[https://micronaut.io/](https://micronaut.io/)
+  .responsive[![Micronaut](assets/images/Micronaut.png)]  
+  [https://micronaut.io/](https://micronaut.io/)
 
 ---
 
@@ -544,8 +552,7 @@ Micronaut is reflection free alternative framework to Spring Boot
 
 # How will this work?
 
-- Extract the distribution ZIP file<br/>
-  _generated by the `distribution` Gradle plugin which is applied by the `application` Gradle plugin_
+- Extract the distribution ZIP file, generated by the `distribution` Gradle plugin which is applied by the `application` Gradle plugin
 
 - Move our application thin JAR to its own directory
 
@@ -555,7 +562,7 @@ Micronaut is reflection free alternative framework to Spring Boot
 
 ---
 
-# Multistage to the rescue
+# Multistage to the rescue!
 
 ```Dockerfile
 FROM alpine:3.12.0 as builder
@@ -580,14 +587,16 @@ ENTRYPOINT ["./bin/run"]
 
 ---
 
-# Demo 6
+# Demo
 
-Create docker image using distribution ZIP and analyse it with dive
+**Create Docker image using distribution ZIP and analyse it with _dive_**
 
 - Go through the `micronaut-layered-jar-1.0.zip` file
-- Go through the multistage docker file
-- Create docker image (using multistage)
-- Inspect with Dive
+- Go through the multistage _Dockerfile_
+- Create Docker image, using multistage
+- Inspect with _dive_
+
+[//]: # (Demo 6)
 
 ---
 
