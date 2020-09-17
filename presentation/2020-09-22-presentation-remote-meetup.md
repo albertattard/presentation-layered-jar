@@ -608,10 +608,32 @@ ENTRYPOINT ["./bin/run"]
 
 # Clojure
 
-Clojure is a functional programming language that runs on the JVM
+- Clojure is a functional programming language that runs on the JVM
 
-.responsive[![Clojure](assets/images/Clojure.png)]
-[https://clojure.org/](https://clojure.org/)
+  .responsive[![Clojure](assets/images/Clojure.png)]  
+  [https://clojure.org/](https://clojure.org/)
+
+---
+
+# No to UberJAR!!
+
+- Clojure application are typically packaged as an UberJAR, equivalent to a FatJAR
+
+- Badigeon is a build library based on `tools.deps`, that can be used to create a slim JAR, a JAR file without dependencies
+
+---
+
+# Demo
+
+**Create Clojure layered JAR Docker image using Badigeon and analyse it with _dive_**
+
+- Go through the project layout
+- Run the project locally
+- Go through the multistage _Dockerfile_
+- Create Docker image, using multistage
+- Inspect with _dive_
+
+[//]: # (Demo 7)
 
 ---
 

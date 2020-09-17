@@ -8,6 +8,39 @@ Create Clojure layered JAR Docker image using Badigeon and analyse it with dive
    $ cd clojure-layered-jar
    ```
 
+1. Analyse project directory
+
+   ```bash
+   $ tree .
+   ```
+
+   We have two Clojure files
+
+   ```bash
+   .
+   ├── Dockerfile
+   ├── build_src
+   │   └── package.clj
+   ├── deps.edn
+   └── src
+       └── layered_jar
+           └── main.clj
+
+   3 directories, 4 files
+   ```
+
+   The `build_src/package.clj` is used build and prepare our application
+
+   ```clojure
+   (ns package
+     (:require [badigeon.bundle :refer [bundle make-out-path]]
+               [badigeon.compile :as c]))
+
+   (defn -main []
+     (bundle (make-out-path 'lib nil))
+     (c/compile 'layered-jar.main {:compile-path "target/classes"}))
+   ```
+
 1. Build the project
 
    ```bash
@@ -76,7 +109,34 @@ Create Clojure layered JAR Docker image using Badigeon and analyse it with dive
    $ mv classes/layered_jar app/layered_jar
    ```
 
-   This is required as we like to separate the application from its dependencies
+   This is required as we like to separate the application from its dependencies.
+
+   The `target` directory should have three directories
+
+   ```bash
+   $ ls -l
+   drwxr-xr-x  3 albertattard  staff   96 Apr 27 12:34 app
+   drwxr-xr-x  9 albertattard  staff  288 Apr 27 12:34 classes
+   drwxr-xr-x  4 albertattard  staff  128 Apr 27 12:34 lib
+   ```
+
+   Our application should be under the `app` directory
+
+   ```bash
+   $ tree app
+   app
+   └── layered_jar
+       ├── main$_main.class
+       ├── main$create_server.class
+       ├── main$fn__13715.class
+       ├── main$loading__6721__auto____149.class
+       ├── main$respond_hello.class
+       ├── main$start.class
+       ├── main.class
+       └── main__init.class
+
+   1 directory, 8 files
+   ```
 
 1. Run the application
 
@@ -84,7 +144,7 @@ Create Clojure layered JAR Docker image using Badigeon and analyse it with dive
    $ java -cp "app:classes:lib/lib/*" layered_jar.main
    ```
 
-   Stop the application
+   The application should still run.  Stop the application
 
 1. Analyse the `Dockerfile`
 
