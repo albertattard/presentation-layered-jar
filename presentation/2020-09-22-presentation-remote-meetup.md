@@ -47,7 +47,7 @@ class: impact
 
 - A standard deployment unit that encapsulates an application and all of its dependencies
 
-.responsive[![Docker Container](assets/images/Docker Container.png)]
+  .responsive[![Docker Container](assets/images/Docker Container.png)]
 
 ---
 
@@ -151,7 +151,7 @@ class: impact
 
 [//]: # (Notes)
 [//]: # (Docker runs instructions in a _Dockerfile_ in order)
-[//]: # (`FROM`: A_Dockerfile_must begin with a FROM instruction, which specifies the Parent Image from which you are building or start from `scratch`, known as [base image](https://docs.docker.com/develop/develop-images/baseimages/).)
+[//]: # (`FROM`: A _Dockerfile_ must begin with a `FROM` instruction, which specifies the Parent Image from which you are building or start from `scratch`, known as [base image](https://docs.docker.com/develop/develop-images/baseimages/).)
 [//]: # (`WORKDIR`: sets the working directory for the following commands.  This is the starting working directory when the container starts.)
 [//]: # (`COPY`: copies the application jar file from the host (laptop) to the filesystem of the Docker image.)
 [//]: # (`ENTRYPOINT`: runs the command with the given command line arguments, in this case a Java application)
@@ -195,7 +195,7 @@ class: impact
   1. `COPY ...`
   1. `ENTRYPOINT ...`
 
-[//]: # (It has 4 layers, each starting with an instruction. Basically every line is a layer.)
+[//]: # (It has 4 layers, each starting with an instruction. Basically, every line is a layer.)
 
 ---
 
@@ -259,7 +259,7 @@ class: impact
   COPY ./build/libs/*.jar application.jar
   ```
 
-- Everytime the FatJAR is copied into a Docker image, a new layer is created
+- Every time the FatJAR is copied into a Docker image, a new layer is created
 
 - Creating many large layers may consume large amounts of disk space
 
@@ -303,8 +303,7 @@ class: impact
 
 [//]: # (Notes)
 [//]: # (What does this mean in detail? We will visualize what happens every time the code changes.)
-[//]: # (Here you can see the layer where the code change is happenning)
-
+[//]: # (Here you can see the layer where the code change is happening)
 
 ---
 
@@ -313,7 +312,7 @@ class: impact
 .responsive[![FatJAR Layers](assets/images/FatJAR Layers - V2.png)]
 
 [//]: # (Notes)
-[//]: # (Even though Docker uses caching as shown in demo 3 and re-uses the first two layers )
+[//]: # (Even though Docker uses caching as shown in demo 3 and re-uses the first two layers)
 [//]: # (every time the app code changes, two new layers are built, one of them containing the whole FatJAR)
 
 ---
@@ -373,7 +372,7 @@ class: impact
 
 .responsive[![Split Dependencies Layers](assets/images/Split Dependencies Layers - V4.png)]
 
-[//]: # (So from now on changes to our application will require a much thinner layer to be created)
+[//]: # (So, from now on changes to our application will require a much thinner layer to be created)
 
 ---
 
