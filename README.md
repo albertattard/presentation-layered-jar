@@ -12,7 +12,7 @@ Docker is everywhere in modern software systems, and has become the standard way
 
 ## Examples
 
-- [Spring Boot Fat JAR](/presentation-layered-jar/tree/master/examples#spring-boot-fat-jar)
+- [Spring Boot Fat JAR](/examples/README.md#spring-boot-fat-jar)
 - [Spring Boot Layered JAR](/presentation-layered-jar/tree/master/examples#spring-boot-layered-jar)
 - [Micronaut Fat JAR](/presentation-layered-jar/tree/master/examples#micronaut-fat-jar)
 - [Micronaut Layered JAR](/presentation-layered-jar/tree/master/examples#micronaut-layered-jar)
