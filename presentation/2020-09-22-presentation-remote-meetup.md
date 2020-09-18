@@ -84,7 +84,7 @@ class: impact
 
 - **Immutable** (cannot be modified once built)
 
-  .conclusion[➤ New image gets created every time a new version of our application is dockerized]
+  .conclusion[➤ New Docker image has to be created every time a new version of our application is built]
 
 [//]: # (A Docker image is a file system with all the programs already install and all the files you need saved in the location you need them)
 [//]: # (This is a good time to introduce dive, a tool for inspecting a Docker image)
@@ -105,7 +105,7 @@ class: impact
 
 # How is a Docker image created?
 
-- By building a _Dockerfile_:
+- By building a _Dockerfile_
 
   ```bash
   $ docker build . -t boot-fat-jar:local
@@ -134,13 +134,13 @@ class: impact
 
 - A text file, usually named `Dockerfile`, that contains a set of instructions, used to create the Docker image
 
-- The _Dockerfile_ is the source file used to create the Docker image
+- So, the _Dockerfile_ is the source file used to create the Docker image
 
 ---
 
 # How does a _Dockerfile_ look like?
 
-- Following is a typical _Dockerfile_ that hosts a Java 8 application:
+- This is a typical _Dockerfile_ that hosts a Java 8 application
 
   ```dockerfile
   FROM adoptopenjdk:8u262-b10-jre-hotspot
@@ -221,15 +221,6 @@ class: impact
 
 ---
 
-# JAR file
-
-.jar (= java archive) is a package file format
-
-[//]: # (Notes)
-[//]: # (In the Demo you just saw a copy instruction involving a `.jar` file.  JAR stands for Java ARchive and is a package file format based on ZIP.  Java applications are package as JAR files.  JAR is not the only format as Java also supports WAR and EAR.  These are used by web containers and application containers respectively and common in JEE.)
-
----
-
 # FatJAR
 
 - A very common way to package a JVM based application is a **FatJAR**
@@ -287,13 +278,13 @@ class: impact
 
 ---
 
-# Small change create large layer
+# Small changes result in large layers
 
 - Our application (FatJAR) contains our code **and** its dependencies
 
 - When new features are added, the dependencies are not necessarily updated
 
-  .conclusion[➤ However, each small change in the code, creates a new docker layer of about 16MB in size]
+  .conclusion[➤ However, each small change in the code creates a new docker layer of about 16MB in size]
 
 ---
 
@@ -337,7 +328,7 @@ class: impact
 
 # An alternative approach
 
-- Some parts of the FatJAR, such as the dependencies, change less frequently than others, yet take up a most of the space
+- Some parts of the FatJAR, such as the dependencies, change less frequently than others, yet take up most of the space
 
   .conclusion[➤ Solution: Separating the dependencies from the code by creating a new layer and taking advantage of Docker layer caching]
 
@@ -456,7 +447,7 @@ class: impact
 
 # Builder stage
 
-- Copy the layered JAR created by Gradle, outside from Docker
+- Copy the layered JAR created by Gradle
 
   ```Dockerfile
   FROM adoptopenjdk:8u262-b10-jre-hotspot as builder
@@ -532,7 +523,7 @@ class: impact
 
 # Micronaut
 
-- Micronaut is reflection free alternative framework to Spring Boot
+- Micronaut is a reflection-free alternative framework to Spring Boot
 
   .responsive[![Micronaut](assets/images/Micronaut.png)]  
   [https://micronaut.io/](https://micronaut.io/)
@@ -545,7 +536,7 @@ class: impact
 
 - This is not available for all other frameworks
 
-- We can still take advantage of the docker multistage to split our dependencies from the application manually
+- We can still take advantage of the multistage Docker build to split our dependencies from the application manually
 
 ---
 
@@ -616,7 +607,7 @@ ENTRYPOINT ["./bin/run"]
 
 # No to UberJAR!!
 
-- Clojure application are typically packaged as an UberJAR, equivalent to a FatJAR
+- Clojure applications are typically packaged as an UberJAR, equivalent to a FatJAR
 
 - Badigeon is a build library based on `tools.deps`, that can be used to create a slim JAR, a JAR file without dependencies
 
