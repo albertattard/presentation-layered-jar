@@ -8,7 +8,7 @@ Docker is everywhere in modern software systems, and has become the standard way
 
 ## Slides
 
-- [2020-09-22-presentation-remote-meetup.pdf](/blob/master/presentation/assets/pdf/2020-09-22-presentation-remote-meetup.pdf)
+- [2020-09-22-presentation-remote-meetup.pdf](/presentation/assets/pdf/2020-09-22-presentation-remote-meetup.pdf)
 
 ## Examples
 
