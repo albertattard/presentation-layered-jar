@@ -14,6 +14,25 @@ Build Boot FatJAR Docker image and analyse layers with dive
    $ ./gradlew clean build
    ```
 
+1. List the build artefacts
+
+   ```bash
+   $ tree build/libs
+
+   build/libs
+   └── boot-fat-jar.jar
+
+   0 directories, 1 file
+   ```
+
+1. Run the application
+
+   ```bash
+   $ java -jar build/libs/boot-fat-jar.jar
+   ```
+
+   This will start the application locally.  Stop the application.
+
 1. Analyse the `Dockerfile`
 
    ```bash
