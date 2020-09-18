@@ -98,6 +98,10 @@ class: impact
 - Overview of _dive_, a tool for exploring a Docker image and its contents
 - Analyse a Docker image with _dive_
 
+  ```bash
+  $ dive spkane/quantum-game:latest
+  ```
+
 [//]: # (Demo 2)
 [//]: # (Shows Docker image contents broken down by layer, we will show you later how to make use of it)
 
