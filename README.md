@@ -13,11 +13,11 @@ Docker is everywhere in modern software systems, and has become the standard way
 ## Examples
 
 - [Spring Boot Fat JAR](/examples/README.md#spring-boot-fat-jar)
-- [Spring Boot Layered JAR](/presentation-layered-jar/tree/master/examples#spring-boot-layered-jar)
-- [Micronaut Fat JAR](/presentation-layered-jar/tree/master/examples#micronaut-fat-jar)
-- [Micronaut Layered JAR](/presentation-layered-jar/tree/master/examples#micronaut-layered-jar)
-- [Clojure Fat JAR](/presentation-layered-jar/tree/master/examples#clojure-fat-jar)
-- [Clojure Layered JAR](/presentation-layered-jar/tree/master/examples#clojure-layered-jar)
+- [Spring Boot Layered JAR](/examples/README.md#spring-boot-layered-jar)
+- [Micronaut Fat JAR](/examples/README.md#micronaut-fat-jar)
+- [Micronaut Layered JAR](/examples/README.md#micronaut-layered-jar)
+- [Clojure Fat JAR](/examples/README.md#clojure-fat-jar)
+- [Clojure Layered JAR](/examples/README.md#clojure-layered-jar)
 
 ## Feedback
 
