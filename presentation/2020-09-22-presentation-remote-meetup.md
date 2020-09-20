@@ -273,7 +273,7 @@ class: impact
 
 - Consider a team working 5 days a week and committing code 20 times per day
 
-- Each commit is followed by a push, which triggers an automated build pipeline, which builds the application and **creates a new docker image**
+- Each commit is followed by a push, which triggers an automated build pipeline, which builds the application and **creates a new Docker image**
 
 .responsive[![Size required after a week FatJAR.png](assets/images/Size required after a week FatJAR.png)]
 
@@ -288,7 +288,7 @@ class: impact
 
 - When new features are added, the dependencies are not necessarily updated
 
-  .conclusion[➤ However, each small change in the code creates a new docker layer of about 16MB in size]
+  .conclusion[➤ However, each small change in the code creates a new Docker layer of about 16MB in size]
 
 ---
 
