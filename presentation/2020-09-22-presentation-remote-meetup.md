@@ -144,7 +144,7 @@ class: impact
 
 # How does a _Dockerfile_ look like?
 
-- This is a typical _Dockerfile_ that hosts a Java 8 application
+- This is a simple _Dockerfile_ that hosts a Java 8 application
 
   ```dockerfile
   FROM adoptopenjdk:8u262-b10-jre-hotspot
@@ -284,7 +284,7 @@ class: impact
 
 # Small changes result in large layers
 
-- Our application (FatJAR) contains our code **and** its dependencies
+- Our FatJAR contains our code **and** its dependencies
 
 - When new features are added, the dependencies are not necessarily updated
 
