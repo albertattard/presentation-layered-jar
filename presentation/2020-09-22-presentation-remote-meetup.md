@@ -136,7 +136,7 @@ class: impact
 
 # What is a _Dockerfile_?
 
-- A text file, usually named `Dockerfile`, that contains a set of instructions, used to create the Docker image
+- A text file, usually named `Dockerfile`, that contains a set of instructions
 
 - So, the _Dockerfile_ is the source file used to create the Docker image
 
