@@ -21,13 +21,13 @@ Docker is everywhere in modern software systems, and has become the standard way
 
 ## Demos
 
--[Demo 1 - Run a Docker image](/presentation/assets/demo/Demo 1 - Run a Docker image.md)
--[Demo 2 - Analyse a Docker image with Dive](/presentation/assets/demo/Demo 2 - Analyse a Docker image with Dive.md)
--[Demo 3 - Build Boot FatJAR Docker image and analyse layers with dive](/presentation/assets/demo/Demo 3 - Build Boot FatJAR Docker image and analyse layers with dive.md)
--[Demo 4 - Build Boot layered JAR, extract it and run extracted JAR](/presentation/assets/demo/Demo 4 - Build Boot layered JAR, extract it and run extracted JAR.md)
--[Demo 5 - Create Docker image using Boot layered JAR and analyse it with dive](/presentation/assets/demo/Demo 5 - Create Docker image using Boot layered JAR and analyse it with dive.md)
--[Demo 6 - Create Micronaut layered JAR Docker image using distribution ZIP and analyse it with dive](/presentation/assets/demo/Demo 6 - Create Micronaut layered JAR Docker image using distribution ZIP and analyse it with dive.md)
--[Demo 7 - Create Clojure layered JAR Docker image using Badigeon and analyse it with dive](/presentation/assets/demo/Demo 7 - Create Clojure layered JAR Docker image using Badigeon and analyse it with dive.md)
+- [Demo 1 - Run a Docker image](/presentation/assets/demo/Demo 1 - Run a Docker image.md)
+- [Demo 2 - Analyse a Docker image with Dive](/presentation/assets/demo/Demo 2 - Analyse a Docker image with Dive.md)
+- [Demo 3 - Build Boot FatJAR Docker image and analyse layers with dive](/presentation/assets/demo/Demo 3 - Build Boot FatJAR Docker image and analyse layers with dive.md)
+- [Demo 4 - Build Boot layered JAR, extract it and run extracted JAR](/presentation/assets/demo/Demo 4 - Build Boot layered JAR, extract it and run extracted JAR.md)
+- [Demo 5 - Create Docker image using Boot layered JAR and analyse it with dive](/presentation/assets/demo/Demo 5 - Create Docker image using Boot layered JAR and analyse it with dive.md)
+- [Demo 6 - Create Micronaut layered JAR Docker image using distribution ZIP and analyse it with dive](/presentation/assets/demo/Demo 6 - Create Micronaut layered JAR Docker image using distribution ZIP and analyse it with dive.md)
+- [Demo 7 - Create Clojure layered JAR Docker image using Badigeon and analyse it with dive](/presentation/assets/demo/Demo 7 - Create Clojure layered JAR Docker image using Badigeon and analyse it with dive.md)
 
 ## Feedback
 
