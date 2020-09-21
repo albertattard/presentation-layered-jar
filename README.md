@@ -1,4 +1,4 @@
-# Optimise your Docker images with Layered JARs
+# Optimise your Docker images with Layered JAR
 
 Docker is everywhere in modern software systems, and has become the standard way to package applications. It provides many features, often unexploited. In this presentation, we will see how we can take advantage of layers in Docker to reduce waste. While this is an intermediate-level Docker topic, we try to present it in an accessible and friendly way, and encourage developers of any level of experience to join us!
 
