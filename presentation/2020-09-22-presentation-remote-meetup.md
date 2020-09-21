@@ -215,7 +215,7 @@ class: impact
 
 # Demo
 
-**Build docker image and analyse layers with _dive_**
+**Build Docker image and analyse layers with _dive_**
 
 - Build a Docker image
 - Discuss layers and see Docker takes advantage of caching
