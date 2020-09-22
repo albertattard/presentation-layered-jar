@@ -566,6 +566,12 @@ Useful docker commands
    $ docker image ls
    ```
 
+1. Delete one local image
+
+   ```bash
+   $ docker rmi <image-id>
+   ```
+
 1. Delete all local images and containers
 
    ```bash
