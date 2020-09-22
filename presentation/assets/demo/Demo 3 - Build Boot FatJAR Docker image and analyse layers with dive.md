@@ -134,6 +134,39 @@ Build Boot FatJAR Docker image and analyse layers with dive
    Successfully tagged boot-fat-jar:local
    ```
 
+1. Build the Docker image again, only after re-creating the FatJAR
+
+   Recreate the FatJAR, without changing anything
+
+   ```bash
+   $ ./gradlew clean bootJar
+   ```
+
+   Build the Docker image again
+
+   ```bash
+   $ docker build . -t boot-fat-jar:local
+   ```
+
+   Notice that the FatJAR was copied again
+
+   ```bash
+   Sending build context to Docker daemon  16.98MB
+   Step 1/4 : FROM adoptopenjdk:8u262-b10-jre-hotspot
+    ---> ded5c12b644e
+   Step 2/4 : WORKDIR /opt/app
+    ---> Using cache
+    ---> 972d16d55f0f
+   Step 3/4 : COPY ./build/libs/*.jar application.jar
+    ---> 454ee0698d97
+   Step 4/4 : ENTRYPOINT ["java", "-jar", "application.jar"]
+    ---> Running in 0f8fc064796c
+   Removing intermediate container 0f8fc064796c
+    ---> cb88ca102865
+   Successfully built cb88ca102865
+   Successfully tagged boot-fat-jar:local
+   ```
+
 1. Investigate the Docker image using `dive`
 
    ```bash
