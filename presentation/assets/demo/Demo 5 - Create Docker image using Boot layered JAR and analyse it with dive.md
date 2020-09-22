@@ -76,6 +76,8 @@ Create Docker image using Boot layered JAR and analyse it with dive
    $ docker build . -t boot-layered-jar:local
    ```
 
+   This time we have two images, the builded image used only while building the Docker image and the final image
+
    ```bash
    Sending build context to Docker daemon  17.13MB
    Step 1/11 : FROM adoptopenjdk:8u262-b10-jre-hotspot as builder
