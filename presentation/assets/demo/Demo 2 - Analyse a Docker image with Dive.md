@@ -38,6 +38,6 @@ Analyse a Docker image with Dive
    Building cache...
    ```
 
-   ![Dive - Layer 1](/assets/images/Dive - Layer 1.png)
+   ![Dive - Layer 1](../images/Dive-Layer-1.png)
 
-   ![Dive - Layer 2](/assets/images/Dive - Layer 2.png)
+   ![Dive - Layer 2](../images/Dive-Layer-2.png)
