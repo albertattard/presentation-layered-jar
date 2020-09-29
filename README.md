@@ -4,7 +4,7 @@ Docker is everywhere in modern software systems, and has become the standard way
 
 ## Meetups
 
-1. [Remote - 22nd of September 2020](https://www.meetup.com/ThoughtWorks_Koeln/events/273188426/) ([Zoom: 9434 6372 828](https://thoughtworks.zoom.us/j/94346372828))
+1. Remote - 22nd of September 2020 ([recording](https://thoughtworks.zoom.us/rec/play/Cc38MhJpUFYfIUDsemeNMveF-5wP-HNttV8Yj6ZZ1awDUBuvi9qrhSZiZyL0NEmMwdwxemNd9evwFQ_c.TcZsdfbPLwV_oB8O))
 
 ## Slides
 
